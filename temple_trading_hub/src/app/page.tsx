@@ -2,8 +2,7 @@
 import  styles from "./Styles/Landing.module.css";
 import "./Styles/global.css";
 import '@fontsource/kadwa/700.css';
-import Topbar from "./components/Topbar";
-import Item from "./components/Item";
+import Item from "@components/Item";
 import img1 from "./Images/plato_complete_works.jpg"
 import RevHoodie from "./Images/Revenge_Hoodie.webp";
 import img2 from "./Images/Stanley_cup_pic.jpg";
@@ -24,7 +23,7 @@ const XR = img5.src;
 
     return(
       <main className={styles.Hello}>
-        <Topbar />
+        
        <div className={styles.upper_content}>
           <div className={styles.display_demo}>
             <Item imageUrl={Plato} item_name="Plato complete works" item_condition="Good Condition"/> 

@@ -1,4 +1,3 @@
-import React from "react";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 //import { motion, useAnimation } from 'framer-motion';
@@ -6,15 +5,16 @@ import styles from "../Styles/TopBar.module.css"
 import '@fontsource/inter/300.css'; // 300 represents the font weight
 import '@fontsource/jua/400.css';
 import Image from 'next/image'
+import Link from "next/link";
 
 
 
 
-const TopBar: React.FC = () =>{
+const TopBar = () =>{
     
     return(
         <div className={styles.topBar}>
-            <div className={styles.section}>
+            <Link href={"/"} className={styles.section}>
             <Image
                src="/Images/r&w_T_SVG.svg"
                alt="Vercel Logo"
@@ -23,16 +23,17 @@ const TopBar: React.FC = () =>{
                height={100}
                priority
             />
-                emple Trading Hub
-            </div>
+                Temple Trading Hub
+            </Link>
             <div className={styles.section2}></div>
             <div className={styles.topButtons}>
                 <Stack spacing={2} direction="row">
-                    <Button className={styles.buttonstyle} variant="text">Home </Button>
+                    <Button className={styles.buttonstyle} variant="text"><Link href={"/"}>Home</Link></Button>
                     {/* fix later
                     <span>|</span> */}
-                    <Button className={styles.buttonstyle} variant="text">Trading</Button>
-                    <Button className={styles.buttonstyle} variant="text">About Us</Button>
+                    <Button className={styles.buttonstyle} variant="text"><Link href={"/trading"}>Trading</Link></Button>
+                    <Button className={styles.buttonstyle} variant="text"><Link href={"/about"}>About Us</Link></Button>
+                    <Button className={styles.buttonstyle} variant="text"><Link href={"/auth/signin"}>Sign In</Link></Button>
                 </Stack>
             </div>
         </div>
