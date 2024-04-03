@@ -10,12 +10,7 @@ const signIn = () => {
         </Typography>
         New User?<Link href={'/auth/signup'}>Sign Up</Link>
         <Stack spacing={2}>
-          <TextField
-            label={'margin="dense"'}
-            fullWidth
-            label='Email'
-            id='email'
-          />
+          <TextField fullWidth label='Email' id='email' />
         </Stack>
       </Container>
     </div>
