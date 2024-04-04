@@ -1,6 +1,6 @@
 "use client"
 
-import { Container, Stack, TextField, Typography } from "@mui/material";
+import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { color } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
@@ -25,8 +25,8 @@ const signIn = () => {
         >
           Sign In
         </Typography>
-        New User?<Link href={"/auth/signup"}>Sign Up</Link>
-        <Stack spacing={2} sx={{backgroundColor: 'red'}}>
+        
+        <Stack spacing={2} sx={{backgroundColor: 'white'}}>
           <form onSubmit={handleSignIn}>
 
           <TextField
@@ -37,10 +37,11 @@ const signIn = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <button type="submit">Sign in</button>
+          <Button type="submit">Sign in</Button>
 
           </form>
         </Stack>
+        New User? <Link href={"/auth/signup"}>Sign Up</Link>
       </Container>
     </div>
   );

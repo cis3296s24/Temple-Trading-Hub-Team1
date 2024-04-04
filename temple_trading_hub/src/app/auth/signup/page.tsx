@@ -17,7 +17,6 @@ const signUp = () => {
 
   useEffect(() => {
     const checkAuthentication = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 50));
       if (user) {
         router.push('/');
       }
