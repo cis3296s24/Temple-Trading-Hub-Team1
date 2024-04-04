@@ -1,3 +1,4 @@
+'use client';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 //import { motion, useAnimation } from 'framer-motion';
@@ -6,8 +7,13 @@ import '@fontsource/inter/300.css'; // 300 represents the font weight
 import '@fontsource/jua/400.css';
 import Image from 'next/image';
 import Link from 'next/link';
+import { UserAuth } from '@context/AuthContext';
+import { useEffect } from 'react';
 
 const TopBar = () => {
+  const { user, signOut } = UserAuth();
+
+  useEffect(() => {}, [user]);
   return (
     <div className={styles.topBar}>
       <Link href={'/'} className={styles.section}>
@@ -35,9 +41,15 @@ const TopBar = () => {
           <Button className={styles.buttonstyle} variant='text'>
             <Link href={'/about'}>About Us</Link>
           </Button>
-          <Button className={styles.buttonstyle} variant='text'>
-            <Link href={'/auth/signin'}>Sign In</Link>
-          </Button>
+          {!user ? (
+            <Button className={styles.buttonstyle} variant='text'>
+              <Link href={'/auth/signin'}>Sign In</Link>
+            </Button>
+          ) : (
+            <Button className={styles.buttonstyle} variant='text'>
+              <Link href={'/auth/signin'}>Sign Out</Link>
+            </Button>
+          )}
         </Stack>
       </div>
     </div>
