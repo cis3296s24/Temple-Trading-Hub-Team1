@@ -4,34 +4,30 @@ import { UserAuth } from "@context/AuthContext";
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { color } from "framer-motion";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+//@ts-ignore
 const signIn = () => {
-  const[email, setEmail] = useState('');
-  const[password, setPassword] = useState('');
 
-  //@ts-ignore
-  const signIn = () => {
-    const router = useRouter();
-    const { user, signIn } = UserAuth();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const handleSignUp = async (e: any) => {
-      e.preventDefault();
-      await signIn(email, password);
+  const router = useRouter();
+  const { user, signIn } = UserAuth();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleSignIn = async (e: any) => {
+    e.preventDefault();
+    await signIn(email, password);
+  };
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      if (user) {
+        router.push('/');
+      }
     };
-  
-    useEffect(() => {
-      const checkAuthentication = async () => {
-        if (user) {
-          router.push('/');
-        }
-      };
-      checkAuthentication();
-    }, [user]);
-  }
-  
+    checkAuthentication();
+  }, [user]);
+
   return (
     <div>
       <Container maxWidth="sm">
@@ -43,26 +39,28 @@ const signIn = () => {
         >
           Sign In
         </Typography>
-        
-        <Stack spacing={2} sx={{backgroundColor: 'white'}}>
-          <form onSubmit={signIn}>
 
-          <TextField
-            fullWidth
-            label="Email"
-            id="email"
-            //@ts-ignore
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <TextField
-            fullWidth
-            label="Password"
-            id="password"
-            //@ts-ignore
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        <Stack spacing={2} sx={{ backgroundColor: 'white' }}>
+          <form onSubmit={handleSignIn}>
 
-          <Button type="submit">Sign in</Button>
+            <TextField
+              fullWidth
+              label="Email"
+              id="email"
+              type='email'
+              //@ts-ignore
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextField
+              fullWidth
+              label="Password"
+              id="password"
+              type='password'
+              //@ts-ignore
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <Button type="submit">Sign in</Button>
 
           </form>
         </Stack>

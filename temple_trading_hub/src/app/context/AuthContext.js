@@ -49,13 +49,14 @@ export const AuthContextProvider = ({ children }) => {
       });
   };
 
-  const signOut = () => {
+  const logOut = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
       })
       .catch((error) => {
         // An error happened.
+        console.log(error);
       });
   };
 
@@ -67,7 +68,7 @@ export const AuthContextProvider = ({ children }) => {
   }, [user]);
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ user, signIn, signUp, logOut }}>
       {children}
     </AuthContext.Provider>
   );

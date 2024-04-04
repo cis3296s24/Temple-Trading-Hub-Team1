@@ -11,9 +11,17 @@ import { UserAuth } from '@context/AuthContext';
 import { useEffect } from 'react';
 
 const TopBar = () => {
-  const { user, signOut } = UserAuth();
+  const { user, logOut } = UserAuth();
 
-  useEffect(() => {}, [user]);
+  const handleSignOut = async (e: any) => {
+    logOut();
+  };
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+    };
+    checkAuthentication();
+  }, [user]);
   return (
     <div className={styles.topBar}>
       <Link href={'/'} className={styles.section}>
@@ -46,8 +54,8 @@ const TopBar = () => {
               <Link href={'/auth/signin'}>Sign In</Link>
             </Button>
           ) : (
-            <Button className={styles.buttonstyle} variant='text'>
-              <Link href={'/auth/signin'}>Sign Out</Link>
+            <Button className={styles.buttonstyle} variant='text' onClick={handleSignOut}>
+                Sign Out
             </Button>
           )}
         </Stack>
