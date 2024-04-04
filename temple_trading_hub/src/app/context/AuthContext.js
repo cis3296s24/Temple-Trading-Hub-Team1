@@ -25,7 +25,7 @@ export const AuthContextProvider = ({ children }) => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          setDoc(doc(db, 'users', `${user.uid}`), {
+          setDoc(doc(db, 'users', `${email}`), {
             email: email,
             userId: user.uid,
           }).catch((error) => {});
