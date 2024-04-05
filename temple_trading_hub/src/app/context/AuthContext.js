@@ -18,19 +18,10 @@ export const AuthContextProvider = ({ children }) => {
       method: 'POST',
       body: JSON.stringify({
         email: email,
+        password: password,
       }),
     });
     if (response.ok) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          setDoc(doc(db, 'users', `${email}`), {
-            email: email,
-            userId: user.uid,
-          }).catch((error) => {});
-        })
-        .catch((error) => {});
     } else {
       console.log(`email bad :(`);
     }

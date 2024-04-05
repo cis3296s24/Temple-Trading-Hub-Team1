@@ -4,21 +4,67 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserAuth } from '@context/AuthContext';
+import {
+  isSignInWithEmailLink,
+  sendSignInLinkToEmail,
+  signInWithEmailLink,
+} from 'firebase/auth';
+import { auth } from '@firebase';
 
 const signUp = () => {
   const router = useRouter();
   const { user, signUp } = UserAuth();
   const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
   const [password, setPassword] = useState('');
   const handleSignUp = async (e: any) => {
     e.preventDefault();
     await signUp(email, password);
+    sendSignInLinkToEmail(auth, email, {
+      // this is the URL that we will redirect back to after clicking on the link in mailbox
+      url: 'http://localhost:3000/auth/signup',
+      handleCodeInApp: true,
+    })
+      .then(() => {
+        localStorage.setItem('email', email);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
     const checkAuthentication = async () => {
       if (user) {
         router.push('/');
+      } else {
+        // user is not signed in but the link is valid
+        if (isSignInWithEmailLink(auth, window.location.href)) {
+          // now in case user clicks the email link on a different device, we will ask for email confirmation
+          let email = localStorage.getItem('email');
+          if (!email) {
+            email = window.prompt('Please provide your email');
+          }
+          // after that we will complete the login process
+          signInWithEmailLink(
+            auth,
+            //@ts-ignore
+            localStorage.getItem('email'),
+            window.location.href
+          )
+            .then((result) => {
+              // we can get the user from result.user but no need in this case
+              console.log(result.user);
+              localStorage.removeItem('email');
+              router.push('/');
+            })
+            .catch((err) => {
+              console.log(err);
+              router.push('/auth/signup');
+            });
+        } else {
+          console.log('enter email and sign in');
+        }
       }
     };
     checkAuthentication();
