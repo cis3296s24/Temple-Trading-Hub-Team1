@@ -3,9 +3,9 @@ import  styles from "./Styles/Landing.module.css";
 import "./Styles/global.css";
 import '@fontsource/kadwa/700.css';
 import Item from "@components/Item";
-import img1 from "./Images/plato_complete_works.jpg"
-import RevHoodie from "./Images/Revenge_Hoodie.webp";
-import img2 from "./Images/Stanley_cup_pic.jpg";
+import img1 from "./images/plato_complete_works.jpg"
+import RevHoodie from "./images/Revenge_Hoodie.webp";
+import img2 from "./images/Stanley_cup_pic.jpg";
 import img3 from "./Images/sweater_for_Trade.webp";
 import img4 from "./Images/worn_Vans.webp"
 import img5 from "./Images/used_iphone_xr.webp"
