@@ -40,7 +40,7 @@ const signIn = () => {
       password: ""
     },
     validationSchema: signInSchema,
-    onSubmit: (values) => {
+    onSubmit: (values: any) => {
       handleSignIn(values);
     }
 
@@ -57,7 +57,7 @@ const signIn = () => {
       >
 
         <Grid item>
-          <Typography className="pageText" variant="h5" color="primary">
+          <Typography className="pageText" variant="h4" color="primary">
           Sign In
           </Typography>
         </Grid>
@@ -74,6 +74,7 @@ const signIn = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.email && Boolean(formik.errors.email)}
+              //@ts-ignore
               helperText={formik.touched.email && formik.errors.email} 
               style={{marginBottom: "1em"}}/>
 
@@ -89,6 +90,7 @@ const signIn = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.password && Boolean(formik.errors.password)}
+              //@ts-ignore
               helperText={formik.touched.password && formik.errors.password} 
               style={{marginBottom: "1em"}}/>
 
