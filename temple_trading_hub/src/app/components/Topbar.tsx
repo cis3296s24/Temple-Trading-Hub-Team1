@@ -17,11 +17,7 @@ const TopBar = () => {
     logOut();
   };
 
-  useEffect(() => {
-    const checkAuthentication = async () => {
-    };
-    checkAuthentication();
-  }, [user]);
+  useEffect(() => {}, [user]);
   return (
     <div className={styles.topBar}>
       <Link href={'/'} className={styles.section}>
@@ -54,8 +50,11 @@ const TopBar = () => {
               <Link href={'/auth/signin'}>Sign In</Link>
             </Button>
           ) : (
-            <Button className={styles.buttonstyle} variant='text' onClick={handleSignOut}>
-                Sign Out
+            <Button
+              className={styles.buttonstyle}
+              variant='text'
+              onClick={handleSignOut}>
+              Sign Out
             </Button>
           )}
         </Stack>

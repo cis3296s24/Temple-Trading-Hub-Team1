@@ -71,32 +71,30 @@ const signUp = () => {
   }, [user]);
   return (
     <div>
-      <Container maxWidth='sm'>
-        <Typography variant='h5' component='h5' align='center' margin={2}>
-          Sign Up
-        </Typography>
-        Existing User?<Link href={'/auth/signin'}>Sign In</Link>
-        <form onSubmit={handleSignUp}>
-          <Stack spacing={2} sx={{ backgroundColor: 'white' }}>
-            <TextField
-              fullWidth
-              label='Email'
-              id='email'
-              type='email'
-              sx={{ color: 'white' }}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField
-              fullWidth
-              label='Password'
-              id='password'
-              type='password'
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Button type='submit'>Sign Up</Button>
-          </Stack>
-        </form>
-      </Container>
+      <Typography variant='h5' component='h5' align='center' margin={2}>
+        Sign Up
+      </Typography>
+      Existing User?<Link href={'/auth/signin'}>Sign In</Link>
+      <form onSubmit={handleSignUp}>
+        <Stack spacing={2} sx={{ backgroundColor: 'white' }}>
+          <TextField
+            fullWidth
+            label='Email'
+            id='email'
+            type='email'
+            sx={{ color: 'white' }}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            fullWidth
+            label='Password'
+            id='password'
+            type='password'
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button type='submit'>Sign Up</Button>
+        </Stack>
+      </form>
     </div>
   );
 };
