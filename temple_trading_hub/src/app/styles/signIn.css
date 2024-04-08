@@ -1,0 +1,21 @@
+
+.outlinedTextField {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+  }
+
+.submitButton {
+  background-color: #9D2235;
+
+}
+.submitButton:hover {
+  background-color: #FFCD00;
+}
+
+.pageText{
+  color: #9D2235;
+}
+
+link {
+  color: #9D2235;
+}
