@@ -15,31 +15,46 @@ import {
 import { useEffect, useState } from "react";
 import "../styles/signIn.css";
 import "../styles/global.css";
-import { CloudUpload } from "@mui/icons-material";
+import { CloudUpload, Description } from "@mui/icons-material";
 import {useFormik} from "formik";
 import * as yup from "yup";
 import { UserAuth } from '@context/AuthContext';
 import { useRouter } from "next/navigation";
+import {uploadTrade} from "./uploadTrade";
 
 const createTradeSchema = yup.object({
-
+    itemname: yup
+        .string()
+        .required("You must name your Item")
+        .min(3, "too short")
+        .max(60, "too long"),
+    description: yup.string().required("Please enter a description"),
+    price: yup.string().required("Please enter a price"),
+    category: yup.string().required("Please select a category"),
 })
 
 const createTrade = () => {
     const { user } = UserAuth();
     const [itemimage, setItemImage] = useState('');
+    const [imageupload, setImageUpload] = useState('');
     const [category, setCategory] = useState("");
     const handleChange = (event: SelectChangeEvent) => {
         setCategory(event.target.value);
     };
+
+    const router = useRouter();
+
+    const handleUploadTrade= async(e : any) => {
+        await uploadTrade(user, e.itemname, e.description, e.price, e.category, imageupload)
+        //@ts-ignore
+        .then( router.push("/createtrade/confirmationpage") )
+    }
 
     useEffect(() => {
         const checkItemImage = async () => {};
         checkItemImage();
     }, [itemimage]);
 
-
-    const router = useRouter();
     useEffect(() => {
         const checkAuthentication = async () => {
             if (!user) {
@@ -58,7 +73,7 @@ const createTrade = () => {
         },
         validationSchema: createTradeSchema,
         onSubmit: (values: any) => {
-            alert(JSON.stringify(values));
+            handleUploadTrade(values);
             //handleCreateTrade(values);
         },
     });
@@ -218,6 +233,7 @@ const createTrade = () => {
                                     formik.setFieldValue('image', fileReader.result);
                                     //@ts-ignore
                                     setItemImage(fileReader.result);
+                                    setImageUpload(e.target.files[0]);
                                   }
                                 };
                                 fileReader.readAsDataURL(e.target.files[0]);
