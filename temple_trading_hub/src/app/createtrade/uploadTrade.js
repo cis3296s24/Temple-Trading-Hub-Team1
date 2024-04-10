@@ -16,7 +16,7 @@ export const uploadTrade = async (user, itemname, description, price, category, 
         description: description,
         price: price,
         category: category,
-        images: arrayUnion(image.name)
+        images: (image.name ? arrayUnion(image.name): "no-image"),
 
     }).catch((error) => {
         console.log("adding listing error");
@@ -25,10 +25,12 @@ export const uploadTrade = async (user, itemname, description, price, category, 
         });
         });
 
-            const storage = getStorage();
-            const imageLocation = `listingImages/${docRef.id}/${image.name}`;
-            const storageRef = ref(storage, imageLocation);
-            uploadBytes(storageRef, image);
+    if(image.name){
+        const storage = getStorage();
+        const imageLocation = `listingImages/${docRef.id}/${image.name}`;
+        const storageRef = ref(storage, imageLocation);
+        uploadBytes(storageRef, image);
+    }
 
     const userDocRef = await updateDoc(doc(db, "users", user.email), {
         listings: arrayUnion(docRef.id),
