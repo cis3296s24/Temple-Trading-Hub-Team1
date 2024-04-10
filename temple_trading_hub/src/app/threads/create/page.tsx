@@ -2,11 +2,7 @@
 
 import {
   Button,
-  FormControl,
   Grid,
-  InputLabel,
-  MenuItem,
-  Select,
   SelectChangeEvent,
   TextField,
   Typography,
@@ -20,26 +16,23 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { UserAuth } from '@context/AuthContext';
 import { useRouter } from 'next/navigation';
+import { uploadThread } from './uploadThread';
 
-const createTradeSchema = yup.object({});
+const createTradeSchema = yup.object({
+  description: yup.string().required('Please enter a description'),
+});
 
 const createThread = () => {
   const { user } = UserAuth();
   const [itemimage, setItemImage] = useState('');
-  const [category, setCategory] = useState('');
-  const handleChange = (event: SelectChangeEvent) => {
-    setCategory(event.target.value);
-  };
+  const [imageupload, setImageUpload] = useState('');
+
+  const router = useRouter();
 
   const handleUploadTrade = async (e: any) => {
-    e.preventDefault();
-    // await uploadTrade(
-    //   user.id.toString(),
-    //   e.itemname,
-    //   e.description,
-    //   e.price,
-    //   e.category
-    // );
+    await uploadThread(user, e.description, imageupload)
+      //@ts-ignore
+      .then(router.push('/threads'));
   };
 
   useEffect(() => {
@@ -47,7 +40,6 @@ const createThread = () => {
     checkItemImage();
   }, [itemimage]);
 
-  const router = useRouter();
   useEffect(() => {
     const checkAuthentication = async () => {
       if (!user) {
@@ -59,16 +51,11 @@ const createThread = () => {
 
   const formik = useFormik({
     initialValues: {
-      itemname: '',
       description: '',
-      price: '',
-      category: '',
     },
     validationSchema: createTradeSchema,
     onSubmit: (values: any) => {
-      alert(JSON.stringify(values));
       handleUploadTrade(values);
-      //handleCreateTrade(values);
     },
   });
 
@@ -86,28 +73,11 @@ const createThread = () => {
         sx={{ width: '50vh', minWidth: '50vh' }}>
         <Grid item>
           <Typography className={'.pageText'} variant='h5'>
-            {' '}
-            Create A Trade{' '}
+            Create A Thread
           </Typography>
         </Grid>
         <Grid item>
           <form onSubmit={formik.handleSubmit}>
-            <TextField
-              fullWidth
-              size='small'
-              variant='filled'
-              className={'outlinedTextField'}
-              style={{ marginBottom: '1em', marginRight: '1em' }}
-              id='itemname'
-              name='itemname'
-              label='Item Name'
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.itemname && Boolean(formik.errors.itemname)}
-              //@ts-ignore
-              helperText={formik.touched.itemname && formik.errors.itemname}
-            />
-
             <TextField
               fullWidth
               multiline
@@ -130,52 +100,6 @@ const createThread = () => {
                 formik.touched.description && formik.errors.description
               }
             />
-            <TextField
-              fullWidth
-              size='small'
-              variant='filled'
-              className={'outlinedTextField'}
-              style={{ marginBottom: '1em' }}
-              id='price'
-              name='price'
-              label='Price'
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={formik.touched.price && Boolean(formik.errors.price)}
-              //@ts-ignore
-              helperText={formik.touched.price && formik.errors.price}
-            />
-
-            <FormControl
-              sx={{
-                width: '100%',
-                marginBottom: '1em',
-                marginRight: '1em',
-                borderRadius: '10px',
-              }}
-              className={'categorySelect'}
-              variant='filled'>
-              <InputLabel variant='filled'>Category</InputLabel>
-              <Select
-                label='Category'
-                value={category}
-                onChange={(e) => {
-                  handleChange(e);
-                  formik.handleChange(e);
-                }}
-                id='category'
-                name='category'>
-                <MenuItem value=''>
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={'electronics'}>Electronics</MenuItem>
-                <MenuItem value={'tools'}>Tools</MenuItem>
-                <MenuItem value={'Apparel'}>Apparel</MenuItem>
-                <MenuItem value={'tools'}>Tools</MenuItem>
-                <MenuItem value={'instruments'}>Instruments</MenuItem>
-                <MenuItem value={'misc'}>Miscellaneous</MenuItem>
-              </Select>
-            </FormControl>
             <Grid>
               {!itemimage ? null : (
                 <Grid
@@ -215,6 +139,7 @@ const createThread = () => {
                       formik.setFieldValue('image', fileReader.result);
                       //@ts-ignore
                       setItemImage(fileReader.result);
+                      setImageUpload(e.target.files[0]);
                     }
                   };
                   fileReader.readAsDataURL(e.target.files[0]);
@@ -227,7 +152,7 @@ const createThread = () => {
               sx={{ float: 'right' }}
               type='submit'
               variant='contained'>
-              Submit Item
+              Create Thread
             </Button>
           </form>
         </Grid>

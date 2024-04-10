@@ -49,7 +49,7 @@ const Threads = () => {
       <ImageList variant='masonry' cols={cols} gap={10}>
         {displayThread}
       </ImageList>
-      {
+      {user && (
         <AppBar
           position='fixed'
           color='transparent'
@@ -65,7 +65,7 @@ const Threads = () => {
             <Box sx={{ flexGrow: 1 }} />
           </Toolbar>
         </AppBar>
-      }
+      )}
     </Container>
   );
 };
