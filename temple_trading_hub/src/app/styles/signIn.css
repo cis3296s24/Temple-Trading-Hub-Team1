@@ -4,9 +4,19 @@
     border-radius: 10px;
   }
 
+  .outlinedTextField:focus {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    border-color: #9D2235 !important;
+  }
+
+
+.categorySelect {
+  background-color: rgb(255, 255, 255);
+}
+
 .submitButton {
   background-color: #9D2235;
-
 }
 .submitButton:hover {
   background-color: #FFCD00;

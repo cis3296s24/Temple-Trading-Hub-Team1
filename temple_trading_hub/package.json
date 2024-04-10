@@ -16,6 +16,7 @@
     "@fontsource/jua": "^5.0.17",
     "@fontsource/kadwa": "^5.0.12",
     "@fontsource/roboto": "^5.0.12",
+    "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.12",
     "@mui/material-nextjs": "^5.15.11",
     "firebase": "^10.6.0",

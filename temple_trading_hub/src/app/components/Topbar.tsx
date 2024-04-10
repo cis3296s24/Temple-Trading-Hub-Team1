@@ -9,6 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { UserAuth } from '@context/AuthContext';
 import { useEffect } from 'react';
+import { Avatar } from '@mui/material';
 
 const TopBar = () => {
   const { user, logOut } = UserAuth();
@@ -22,6 +23,7 @@ const TopBar = () => {
     };
     checkAuthentication();
   }, [user]);
+  
   return (
     <div className={styles.topBar}>
       <Link href={'/'} className={styles.section}>
@@ -58,6 +60,11 @@ const TopBar = () => {
                 Sign Out
             </Button>
           )}
+
+          {!user ? null : (
+            <Avatar />
+          )}
+
         </Stack>
       </div>
     </div>
