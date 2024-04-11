@@ -10,6 +10,7 @@ import Link from 'next/link';
 import logo from '@images/temple-logo-t-box.webp';
 import { UserAuth } from '@context/AuthContext';
 import { useEffect } from 'react';
+import { Avatar } from '@mui/material';
 
 const TopBar = () => {
   const { user, logOut } = UserAuth();
@@ -22,6 +23,7 @@ const TopBar = () => {
     const checkAuthentication = async () => {};
     checkAuthentication();
   }, [user]);
+  
   return (
     <div className={styles.topBar}>
       <Link href={'/'} className={styles.section}>
@@ -65,6 +67,11 @@ const TopBar = () => {
               Sign Out
             </Button>
           )}
+
+          {!user ? null : (
+            <Avatar />
+          )}
+
         </Stack>
       </div>
     </div>
