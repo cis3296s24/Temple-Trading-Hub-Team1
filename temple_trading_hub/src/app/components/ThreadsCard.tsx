@@ -18,7 +18,7 @@ export default function ThreadsCard({ doc }: any) {
         }
         title={doc.userEmail}
       />
-      {doc.image && (
+      {doc.imageUrl && (
         <CardMedia component='img' image={doc.imageUrl} alt={doc.image} />
       )}
       <CardContent>
