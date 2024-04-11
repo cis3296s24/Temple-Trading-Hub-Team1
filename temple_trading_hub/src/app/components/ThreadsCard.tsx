@@ -7,26 +7,23 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 
-export default function ThreadsCard(props: any) {
+export default function ThreadsCard({ doc }: any) {
   return (
     <Card>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
-            R
+          <Avatar sx={{ bgcolor: red[500] }} aria-label='user'>
+            {doc.userEmail[0]}
           </Avatar>
         }
-        title='Shrimp and Chorizo Paella'
-        subheader='September 14, 2016'
+        title={doc.userEmail}
       />
-      {props.image && (
-        <CardMedia component='img' image={props.image} alt='Paella dish' />
+      {doc.image && (
+        <CardMedia component='img' image={doc.imageUrl} alt={doc.image} />
       )}
       <CardContent>
         <Typography variant='body2' color='text.secondary'>
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          {doc.description}
         </Typography>
       </CardContent>
     </Card>

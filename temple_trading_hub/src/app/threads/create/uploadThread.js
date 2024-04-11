@@ -8,7 +8,7 @@ export const uploadThread = async (user, description, image) => {
     userID: user.uid,
     userEmail: user.email,
     description: description,
-    images: image ? image.name : '',
+    images: image.name ? arrayUnion(image.name) : '',
   }).catch((error) => {
     console.log('adding thread error');
     return new Response('adding thread error', {
@@ -16,13 +16,23 @@ export const uploadThread = async (user, description, image) => {
     });
   });
 
-  const storage = getStorage();
-  const imageLocation = `threadImages/${docRef.id}/${image.name}`;
-  const storageRef = ref(storage, imageLocation);
-  uploadBytes(storageRef, image);
+  let link = undefined;
 
-  await updateDoc(doc(db, 'users', user.email), {
-    threads: { [docRef.id]: `${docRef.id}` },
+  if (image.name) {
+    const storage = getStorage();
+    const imageLocation = `threadImages/${docRef.id}/${image.name}`;
+    const storageRef = ref(storage, imageLocation);
+    await uploadBytes(storageRef, image);
+    link = await getDownloadURL(storageRef);
+  }
+
+  await updateDoc(docRef, {
+    imageUrl: link ? arrayUnion(link) : '',
+    uid: docRef.id,
+  });
+
+  const userDocRef = await updateDoc(doc(db, 'users', user.email), {
+    threads: arrayUnion(docRef.id),
   }).catch((error) => {
     console.log('Update User Error');
     return new Response('update user error', {
@@ -30,7 +40,7 @@ export const uploadThread = async (user, description, image) => {
     });
   });
 
-  return new Response('Thread Posted :)', {
+  return new Response('Lisitng Posted :)', {
     status: 200,
   });
 };
