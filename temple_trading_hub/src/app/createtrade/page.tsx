@@ -45,6 +45,7 @@ const createTrade = () => {
     const router = useRouter();
 
     const handleUploadTrade= async(e : any) => {
+        console.log(imageupload);
         await uploadTrade(user, e.itemname, e.description, e.price, e.category, imageupload)
         //@ts-ignore
         .then( router.push("/createtrade/confirmationpage") )
