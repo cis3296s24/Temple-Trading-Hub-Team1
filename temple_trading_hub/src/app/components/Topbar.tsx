@@ -7,6 +7,7 @@ import '@fontsource/inter/300.css'; // 300 represents the font weight
 import '@fontsource/jua/400.css';
 import Image from 'next/image';
 import Link from 'next/link';
+import logo from '@images/temple-logo-t-box.webp';
 import { UserAuth } from '@context/AuthContext';
 import { useEffect } from 'react';
 import { Avatar } from '@mui/material';
@@ -19,8 +20,7 @@ const TopBar = () => {
   };
 
   useEffect(() => {
-    const checkAuthentication = async () => {
-    };
+    const checkAuthentication = async () => {};
     checkAuthentication();
   }, [user]);
   
@@ -28,9 +28,10 @@ const TopBar = () => {
     <div className={styles.topBar}>
       <Link href={'/'} className={styles.section}>
         <Image
-          src='/Images/r&w_T_SVG.svg'
-          alt='Vercel Logo'
+          src={logo.src}
+          alt='Logo'
           className={styles.vercelLogo}
+          style={{ marginRight: '10px' }}
           width={100}
           height={100}
           priority
@@ -49,6 +50,9 @@ const TopBar = () => {
             <Link href={'/trading'}>Trading</Link>
           </Button>
           <Button className={styles.buttonstyle} variant='text'>
+            <Link href={'/threads'}>Threads</Link>
+          </Button>{' '}
+          <Button className={styles.buttonstyle} variant='text'>
             <Link href={'/about'}>About Us</Link>
           </Button>
           {!user ? (
@@ -56,8 +60,11 @@ const TopBar = () => {
               <Link href={'/auth/signin'}>Sign In</Link>
             </Button>
           ) : (
-            <Button className={styles.buttonstyle} variant='text' onClick={handleSignOut}>
-                Sign Out
+            <Button
+              className={styles.buttonstyle}
+              variant='text'
+              onClick={handleSignOut}>
+              Sign Out
             </Button>
           )}
 
