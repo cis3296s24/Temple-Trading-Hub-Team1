@@ -12,26 +12,31 @@ import '../styles/About.css';
 import ThreadsCard from '@components/ThreadsCard';
 import AddIcon from '@mui/icons-material/Add';
 import useScreenSize from '@hooks/useScreenSize';
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import { UserAuth } from '@context/AuthContext';
 import Link from 'next/link';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@firebase';
 
 const Threads = () => {
+  const [threads, setThreads] = useState(null);
   const [cols, setCols] = useState(3);
   const screenSize = useScreenSize();
   const { user } = UserAuth();
 
-  const displayThread = async () => {
-    const querySnapshot = await getDocs(collection(db, 'threads'));
-    querySnapshot.forEach((doc) => {
-      return (
-        <ImageListItem key={doc.uid}>
-          <ThreadsCard image={doc.imageUrl} />
-        </ImageListItem>
-      );
-    });
+  const displayThread = () => {
+    return (
+      <ImageList variant='masonry' cols={cols} gap={10}>
+        {
+          //@ts-ignore
+          threads.forEach((doc: any) => {
+            <ImageListItem key={doc.uid}>
+              <ThreadsCard image={doc.imageUrl} />
+            </ImageListItem>;
+          })
+        }
+      </ImageList>
+    );
   };
 
   useEffect(() => {
@@ -44,11 +49,18 @@ const Threads = () => {
     }
   }, [screenSize.width, user]);
 
+  useEffect(() => {
+    const getThreads = async () => {
+      const querySnapshot: any = await getDocs(collection(db, 'threads'));
+      console.log(querySnapshot);
+      setThreads(querySnapshot);
+    };
+    getThreads();
+  }, [threads]);
+
   return (
     <Container maxWidth='lg' sx={{ padding: '30px' }}>
-      <ImageList variant='masonry' cols={cols} gap={10}>
-        {displayThread}
-      </ImageList>
+      {displayThread}
       {user && (
         <AppBar
           position='fixed'

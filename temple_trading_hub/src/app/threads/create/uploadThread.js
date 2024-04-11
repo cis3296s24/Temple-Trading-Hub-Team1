@@ -1,10 +1,5 @@
 import { db } from '@firebase';
-import {
-  addDoc,
-  doc,
-  updateDoc,
-  collection,
-} from 'firebase/firestore';
+import { addDoc, doc, updateDoc, collection } from 'firebase/firestore';
 
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
@@ -13,7 +8,7 @@ export const uploadThread = async (user, description, image) => {
     userID: user.uid,
     userEmail: user.email,
     description: description,
-    images: image.name,
+    images: image ? image.name : '',
   }).catch((error) => {
     console.log('adding thread error');
     return new Response('adding thread error', {
@@ -27,7 +22,7 @@ export const uploadThread = async (user, description, image) => {
   uploadBytes(storageRef, image);
 
   await updateDoc(doc(db, 'users', user.email), {
-    threads: { ...threads, [docRef.id]: `${docRef.id}` },
+    threads: { [docRef.id]: `${docRef.id}` },
   }).catch((error) => {
     console.log('Update User Error');
     return new Response('update user error', {
