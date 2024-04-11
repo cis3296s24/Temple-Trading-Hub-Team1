@@ -15,7 +15,7 @@ import {
 import { useEffect, useState } from "react";
 import "../styles/signIn.css";
 import "../styles/global.css";
-import { CloudUpload, Description } from "@mui/icons-material";
+import { CloudUpload } from "@mui/icons-material";
 import {useFormik} from "formik";
 import * as yup from "yup";
 import { UserAuth } from '@context/AuthContext';
@@ -45,6 +45,7 @@ const createTrade = () => {
     const router = useRouter();
 
     const handleUploadTrade= async(e : any) => {
+        console.log(imageupload);
         await uploadTrade(user, e.itemname, e.description, e.price, e.category, imageupload)
         //@ts-ignore
         .then( router.push("/createtrade/confirmationpage") )
@@ -204,7 +205,6 @@ const createTrade = () => {
                             alignSelf="center"
                             width="100%"
                             sx={{
-                                height: 233,
                                 border: "2px solid #9D2235",
                                 borderRadius: "10px"
                             }}
