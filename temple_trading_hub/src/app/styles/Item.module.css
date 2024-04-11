@@ -23,3 +23,8 @@
 .item_info{
   margin-left: 10%;
 }
+
+.MuiCardContentRoot {
+  background-color: white; 
+  border-radius: 30px;
+} 

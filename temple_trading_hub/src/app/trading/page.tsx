@@ -4,6 +4,8 @@ import "../Styles/global.css";
 import styles from '../Styles/trading.module.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 //import { motion, useAnimation } from 'framer-motion';
 import '@fontsource/inter/300.css'; // 300 represents the font weight
 import '@fontsource/jua/400.css';
@@ -13,7 +15,9 @@ import { UserAuth } from '@context/AuthContext';
 import { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { Typography, CardActions } from '@mui/material';
 import Item from "@components/Item";
+import ItemsList from '../components/ItmesList';
 import img1 from "../images/plato_complete_works.jpg"
 import RevHoodie from "../images/Revenge_Hoodie.webp";
 import img2 from "../images/Stanley_cup_pic.jpg";
@@ -40,6 +44,42 @@ const Wjacket = img9.src;
 const phl = img10.src;
 const Rmouse = img11.src;
 const Aguitar = img12.src;
+
+const bull = (
+    <Box
+      component="span"
+      sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+    >
+      •
+    </Box>
+  );
+  
+  const card = (
+    <React.Fragment>
+      <CardContent>
+      <Image src={XR} alt="Item Image" width={200} height={200} /> 
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          Word of the Day
+        </Typography>
+        <Typography variant="h5" component="div">
+          be{bull}nev{bull}o{bull}lent
+        </Typography>
+        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          adjective
+        </Typography>
+        <Typography variant="body2">
+          well meaning and kindly.
+          <br />
+          {'"a benevolent smile"'}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Learn More</Button>
+      </CardActions>
+    </React.Fragment>
+  );
+
+  
 const trading = () =>{
     return(
     <div>
@@ -47,18 +87,9 @@ const trading = () =>{
            What are you looking for?<TextField id="filled-basic" className={styles.outlinedTextField} label="Filled" variant="filled"/>
         </div>
         <div className={styles.trading_content}>
-        <Item imageUrl={Plato} item_name="Plato complete works" item_condition="Good Condition"/> 
-            <Item imageUrl={Sweater} item_name="pastel-sweater" item_condition="Never Worn"/> 
-            <Item imageUrl={StanleyCup} item_name="Stanley Cup - white" item_condition="never used"/> 
-            <Item imageUrl={vans} item_name="Low Top Vans - Black" item_condition="Heavily Used"/> 
-            <Item imageUrl={Rev} item_name="Revenge Hoodie Embroidered" item_condition="Never Worn"/> 
-            <Item imageUrl={airp} item_name="Airpod Pros" item_condition="used"/> 
-            <Item imageUrl={rila} item_name="Rilakuma - pancake" item_condition="used"/> 
-            <Item imageUrl={mac} item_name="macbook" item_condition="used"/> 
-            <Item imageUrl={Wjacket} item_name="Winter jacket" item_condition="used"/> 
-            <Item imageUrl={phl} item_name="Phillies Jersey" item_condition="used"/> 
-            <Item imageUrl={Rmouse} item_name="Razer mouse" item_condition="used"/> 
-            <Item imageUrl={Aguitar} item_name="acoustic guitar" item_condition="used"/> 
+            <Card variant="outlined">{card}</Card>
+            <Item imageUrl={Plato} item_name="Plato complete works" item_condition="Good Condition"/> 
+            <ItemsList />
         </div>
     </div>
     );

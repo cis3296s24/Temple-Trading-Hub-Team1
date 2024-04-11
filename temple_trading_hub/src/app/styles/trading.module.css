@@ -25,4 +25,13 @@
   padding: 80px; /* Padding for the container */
   }
 
+  /* styles.module.css */
+
+
+/* Target the CardContent inside React.Fragment */
+.MuiCardContent-root {
+  background-color: white; 
+} 
+
+
  
