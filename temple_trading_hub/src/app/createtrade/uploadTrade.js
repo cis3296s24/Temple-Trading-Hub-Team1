@@ -1,6 +1,7 @@
 
 import { db } from '@firebase';
 import { addDoc, doc, updateDoc, arrayUnion, collection} from "firebase/firestore";
+
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
@@ -9,7 +10,6 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 export const uploadTrade = async (user, itemname, description, price, category, image) => {
 
     const docRef = await addDoc(collection(db, "listings"),  {
-        userID: user.uid,
         userID: user.uid,
         userEmail: user.email,
         title: itemname,
