@@ -23,7 +23,7 @@ const TopBar = () => {
     const checkAuthentication = async () => {};
     checkAuthentication();
   }, [user]);
-  
+
   return (
     <div className={styles.topBar}>
       <Link href={'/'} className={styles.section}>
@@ -67,11 +67,7 @@ const TopBar = () => {
               Sign Out
             </Button>
           )}
-
-          {!user ? null : (
-            <Avatar />
-          )}
-
+          {!user ? null : <Avatar />}
         </Stack>
       </div>
     </div>
