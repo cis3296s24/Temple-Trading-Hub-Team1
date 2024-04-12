@@ -1,5 +1,5 @@
-'use client';
-import * as React from 'react';
+"use client";
+import * as React from "react";
 import "../Styles/global.css";
 import styles from '../Styles/trading.module.css';
 import Stack from '@mui/material/Stack';
@@ -83,6 +83,6 @@ const trading = () =>{
       </Box>  */}
     </div>
     );
-}
+};
 
 export default trading;
