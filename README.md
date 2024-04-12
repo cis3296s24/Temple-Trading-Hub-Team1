@@ -5,7 +5,7 @@
 **dependencies:**
 
 - Install the latest node from https://nodejs.org/en/download
-- To install dependencies, cd to the actual project `cd temple_trading_hub` and run the command `sudo npm run i` on Mac or `npm i`on other machines you must allow npm to have permissions or you will get an error
+- To install dependencies, cd to the actual project `cd temple_trading_hub` and run the command `sudo npm i` on Mac or `npm i`on other machines you must allow npm to have permissions or you will get an error
 
 **running**
 
