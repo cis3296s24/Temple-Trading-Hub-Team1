@@ -10,31 +10,54 @@ import styles from "../Styles/Item.module.css"
 import '@fontsource/inter/300.css'; // 300 represents the font weight
 import '@fontsource/jua/400.css';
 import Image from 'next/image';
-import Link from 'next/link';
 
 interface ItemProps {
-    imageUrl: string;
-    item_name: string;
-    item_condition: string;
-    id: string; // Add an id prop for the item's unique identifier
+    imageUrl: string; // Prop for the image URL
+    item_name: string;// prop for the items name
+    item_condition: string;// prop for the condition of the item
+    className?: string; 
 }
 
-const Item: React.FC<ItemProps> = ({ imageUrl, item_name, item_condition, id }) => {
-    return (
-        <div className={styles.item}>
-            <Link href={`/app/Products/ProductPage?id=${id}`}> {/* Use the id prop in the Link */}
-                <a>
-                    <Image src={imageUrl} alt="Item Image" width={200} height={200} />
-                    <div className={styles.item_info}>
-                        {item_name}
-                    </div>
-                    <div className={styles.item_info}>
-                        {item_condition}
-                    </div>
-                </a>
-            </Link>
-        </div>
+const bull = (
+    <Box
+      component="span"
+      sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+    >
+      •
+    </Box>
+  );
+
+
+
+const Item: React.FC<ItemProps> = ({ imageUrl, item_name, item_condition,className }) =>{
+
+    return(
+    <React.Fragment >
+      <Card className={className}>
+        <CardHeader title={item_name} color="black"/>
+        <CardContent className={styles.MuiCardContentRoot}>
+          <CardMedia component="img" height="190" width="100%" image={imageUrl} alt="img not available"/> 
+              <Typography sx={{ fontSize: 16 }} variant="h5" color="black" gutterBottom>
+                     {bull} {item_name}
+              </Typography>
+              <Typography sx={{ fontSize: 14 }} color="black" gutterBottom>
+                     {bull} {item_condition}
+              </Typography>
+        </CardContent>
+      </Card>  
+    </React.Fragment>
+        // <div className={styles.item}>
+        //    {/* Display the image */}
+        //    <Image src={imageUrl} alt="Item Image" width={200} height={200} /> 
+        //    <div className={styles.item_info}>
+        //         {item_name}
+        //    </div>
+        //    <div className={styles.item_info}>
+        //         {item_condition}
+        //    </div>
+        // </div>
     );
+
 }
 
 export default Item;
