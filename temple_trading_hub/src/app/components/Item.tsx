@@ -1,6 +1,10 @@
 import React from "react";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import { Typography, CardActions, CardHeader, CardMedia } from '@mui/material';
+import Box from '@mui/material/Box';
 //import { motion, useAnimation } from 'framer-motion';
 import styles from "../Styles/Item.module.css"
 import '@fontsource/inter/300.css'; // 300 represents the font weight
