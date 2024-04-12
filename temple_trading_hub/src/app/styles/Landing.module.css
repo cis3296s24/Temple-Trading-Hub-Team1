@@ -11,10 +11,13 @@
   border-radius: 50px;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Three columns */
-  grid-template-rows: repeat(2, auto); /* Two rows */
+  grid-auto-rows: auto; /* Two rows */
   gap: 25px; /* Padding between rows and columns */
   padding: 30px; /* Padding for the container */
+  object-fit: contain;
 }
+
+
 
 .upper_content {
   display: flex;

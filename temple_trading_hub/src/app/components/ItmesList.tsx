@@ -12,9 +12,9 @@ const ItemsList = () => {
         try {
             const db = getFirestore();
             const itemsCollection = collection(db, 'listings');
-            const querySnapshot = await getDocs(query(itemsCollection, where('userID', '==', '20cVRqTZQmMi7fLYLbpeOQFslKF2')));
+            const querySnapshot = await getDocs(query(itemsCollection, where('userID', '==', 'IT7O6fATWOhMKz57HonJJ8g6ZrF2')));
             console.log('Query snapshot:', querySnapshot);
-            const itemsData = querySnapshot.docs.map(doc => ({ id: doc.id, title: doc.data().title, condition: doc.data().condition, images: doc.data().images }));
+            const itemsData = querySnapshot.docs.map(doc => ({ id: doc.id, title: doc.data().title, condition: doc.data().condition, images: doc.data().imageUrl }));
             console.log('Items data:', itemsData);
             setItems(itemsData);
         } catch (error) {
@@ -31,7 +31,7 @@ const ItemsList = () => {
         {items.map(item => (
             <Item
                 key={item.id} // Using the document ID as the key
-                imageUrl={item.images[0]}
+                imageUrl={item.images?.[0]}
                 item_name={item.title}
                 item_condition={item.condition}
             />

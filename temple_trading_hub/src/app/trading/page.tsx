@@ -14,36 +14,15 @@ import Link from 'next/link';
 import { UserAuth } from '@context/AuthContext';
 import { useEffect } from 'react';
 import Box from '@mui/material/Box';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 import TextField from '@mui/material/TextField';
-import { Typography, CardActions } from '@mui/material';
+import { Typography, CardActions, CardHeader, CardMedia } from '@mui/material';
 import Item from "@components/Item";
 import ItemsList from '../components/ItmesList';
-import img1 from "../images/plato_complete_works.jpg"
-import RevHoodie from "../images/Revenge_Hoodie.webp";
-import img2 from "../images/Stanley_cup_pic.jpg";
-import img3 from "../Images/sweater_for_Trade.webp";
-import img4 from "../Images/worn_Vans.webp"
 import img5 from "../Images/used_iphone_xr.webp"
-import img6 from "../images/airpods.webp"
-import img7 from "../images/rilakuma.webp"
-import img8 from "../images/macbook.jpg"
-import img9 from "../images/winter_jacket.jpg"
-import img10 from "../images/phillies.jpg"
-import img11 from "../images/razer_mouse.png"
-import img12 from "../images/A_guitar.jpg"
-const Rev = RevHoodie.src;
-const Plato = img1.src;
-const StanleyCup = img2.src;
-const Sweater = img3.src;
-const vans = img4.src;
+
 const XR = img5.src;
-const airp = img6.src;
-const rila = img7.src;
-const mac = img8.src;
-const Wjacket = img9.src;
-const phl = img10.src;
-const Rmouse = img11.src;
-const Aguitar = img12.src;
 
 const bull = (
     <Box
@@ -56,6 +35,8 @@ const bull = (
   
   const card = (
     <React.Fragment>
+
+      <CardHeader title={"testing"}/>
       <CardContent>
       <Image src={XR} alt="Item Image" width={200} height={200} /> 
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -83,14 +64,23 @@ const bull = (
 const trading = () =>{
     return(
     <div>
-        <div className={styles.trading}>
-           What are you looking for?<TextField id="filled-basic" className={styles.outlinedTextField} label="Filled" variant="filled"/>
-        </div>
-        <div className={styles.trading_content}>
-            <Card variant="outlined">{card}</Card>
-            <Item imageUrl={Plato} item_name="Plato complete works" item_condition="Good Condition"/> 
-            <ItemsList />
-        </div>
+       <Box sx={{ width: 'auto', height: 'auto', overflowY: 'scroll' }}>
+        <ImageList variant="masonry" cols={1} gap={8}>
+          <div className={styles.trading}>
+            What are you looking for?<TextField id="filled-basic" className={styles.outlinedTextField} label="Filled" variant="filled"/>
+          </div>
+          <div className={styles.trading_content}>
+              <Card variant="outlined">{card}</Card>
+              <Item imageUrl={XR} item_name="Plato complete works" item_condition="Good Condition"/> 
+              <ItemsList />
+          </div> 
+          </ImageList>
+        </Box>
+      {/* <Box sx={{ width: 450, height: 450, overflowY: 'scroll' }}>
+        <ImageList variant="masonry" cols={4} gap={8}>
+          <ItemsList/>
+        </ImageList>
+      </Box>  */}
     </div>
     );
 }
