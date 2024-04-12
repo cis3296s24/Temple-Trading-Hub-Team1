@@ -6,30 +6,31 @@ import styles from "../Styles/Item.module.css"
 import '@fontsource/inter/300.css'; // 300 represents the font weight
 import '@fontsource/jua/400.css';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface ItemProps {
-    imageUrl: string; // Prop for the image URL
-    item_name: string;// prop for the items name
-    item_condition: string;// prop for the condition of the item
+    imageUrl: string;
+    item_name: string;
+    item_condition: string;
+    id: string; // Add an id prop for the item's unique identifier
 }
 
-const Item: React.FC<ItemProps> = ({ imageUrl, item_name, item_condition }) =>{
-
-   
-    
-    return(
+const Item: React.FC<ItemProps> = ({ imageUrl, item_name, item_condition, id }) => {
+    return (
         <div className={styles.item}>
-           {/* Display the image */}
-           <Image src={imageUrl} alt="Item Image" width={200} height={200} /> 
-           <div className={styles.item_info}>
-                {item_name}
-           </div>
-           <div className={styles.item_info}>
-                {item_condition}
-           </div>
+            <Link href={`/app/Products/ProductPage?id=${id}`}> {/* Use the id prop in the Link */}
+                <a>
+                    <Image src={imageUrl} alt="Item Image" width={200} height={200} />
+                    <div className={styles.item_info}>
+                        {item_name}
+                    </div>
+                    <div className={styles.item_info}>
+                        {item_condition}
+                    </div>
+                </a>
+            </Link>
         </div>
     );
-
 }
 
 export default Item;
