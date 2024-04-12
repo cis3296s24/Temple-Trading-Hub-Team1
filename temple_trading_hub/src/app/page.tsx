@@ -2,7 +2,7 @@
 import  styles from "./Styles/Landing.module.css";
 import "./Styles/global.css";
 import '@fontsource/kadwa/700.css';
-import Item from "@components/Item";
+import Item from "@components/ItemEx";
 import img1 from "./images/plato_complete_works.jpg"
 import RevHoodie from "./images/Revenge_Hoodie.webp";
 import img2 from "./images/Stanley_cup_pic.jpg";
@@ -28,7 +28,7 @@ const XR = img5.src;
           <div className={styles.display_demo}>
             <Item imageUrl={Plato} item_name="Plato complete works" item_condition="Good Condition"/> 
             <Item imageUrl={Sweater} item_name="pastel-sweater" item_condition="Never Worn"/> 
-            <Item imageUrl={StanleyCup} item_name="Stanley Cup - white" item_condition="never used"/> 
+            <Item  imageUrl={StanleyCup} item_name="Stanley Cup - white" item_condition="never used"/> 
             <Item imageUrl={vans} item_name="Low Top Vans - Black" item_condition="Heavily Used"/> 
             <Item imageUrl={Rev} item_name="Revenge Hoodie Embroidered" item_condition="Never Worn"/> 
             <Item imageUrl={XR} item_name="Iphone XR - Black" item_condition="used"/> 
