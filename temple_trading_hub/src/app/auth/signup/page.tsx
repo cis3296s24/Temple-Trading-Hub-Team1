@@ -1,6 +1,17 @@
 'use client';
-import { Button, Container, Stack, TextField, Typography } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  Grid,
+  TextField,
+  Typography,
+  Link as Li,
+} from '@mui/material';
 import Link from 'next/link';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserAuth } from '@context/AuthContext';
@@ -24,34 +35,93 @@ const signUp = () => {
     checkAuthentication();
   }, [user]);
   return (
-    <div>
-      <Container maxWidth='sm'>
-        <Typography variant='h5' component='h5' align='center' margin={2}>
+    <Container
+      component='main'
+      maxWidth='xs'
+      sx={{
+        height: '75vh',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignContent: 'center',
+      }}>
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}>
+        <Avatar sx={{ m: 1, bgcolor: 'primary.main', color: 'white' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component='h1' variant='h5'>
           Sign Up
         </Typography>
-        Existing User?<Link href={'/auth/signin'}>Sign In</Link>
-        <form onSubmit={handleSignUp}>
-          <Stack spacing={2} sx={{ backgroundColor: 'white' }}>
-            <TextField
-              fullWidth
-              label='Email'
-              id='email'
-              type='email'
-              sx={{ color: 'white' }}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField
-              fullWidth
-              label='Password'
-              id='password'
-              type='password'
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Button type='submit'>Sign Up</Button>
-          </Stack>
-        </form>
-      </Container>
-    </div>
+        <Box component='form' noValidate onSubmit={handleSignUp} sx={{ mt: 3 }}>
+          <Grid container spacing={2}>
+            {/* <Grid item xs={12}>
+              <TextField
+                autoComplete='username'
+                name='userName'
+                required
+                fullWidth
+                id='userName'
+                autoFocus
+                hiddenLabel
+                size='small'
+                variant='outlined'
+                aria-label='Username*'
+                placeholder='Username*'
+              />
+            </Grid> */}
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id='email'
+                name='email'
+                autoComplete='email'
+                onChange={(e) => setEmail(e.target.value)}
+                hiddenLabel
+                size='small'
+                variant='outlined'
+                aria-label='Email Address*'
+                placeholder='Email Address*'
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name='password'
+                type='password'
+                id='password'
+                autoComplete='new-password'
+                onChange={(e) => setPassword(e.target.value)}
+                hiddenLabel
+                size='small'
+                variant='outlined'
+                aria-label='Password*'
+                placeholder='Password*'
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type='submit'
+            fullWidth
+            variant='contained'
+            sx={{ mt: 3, mb: 2 }}>
+            Sign Up
+          </Button>
+          <Grid container justifyContent='center'>
+            <Grid item>
+              Already have an account? <Li href='/auth/signin'>Sign in</Li>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 

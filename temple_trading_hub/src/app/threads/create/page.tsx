@@ -61,9 +61,18 @@ const createThread = () => {
   });
 
   return (
-    <Container>
-      <Typography className={'.pageText'} variant='h5' align='center'>
-        Create A Thread
+    <Container
+      component='main'
+      maxWidth='sm'
+      sx={{
+        paddingTop: '50px',
+        minHeight: '70vh',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignContent: 'center',
+      }}>
+      <Typography component='h1' variant='h5' sx={{ mb: 1.5 }} align='center'>
+        Create a thread
       </Typography>
       <form onSubmit={formik.handleSubmit}>
         <TextField
@@ -72,12 +81,13 @@ const createThread = () => {
           maxRows={4}
           minRows={4}
           size='small'
-          variant='filled'
+          variant='outlined'
           className={'outlinedTextField'}
           style={{ marginBottom: '1em' }}
           id='description'
           name='description'
-          label='Item Description'
+          aria-label='Thread*'
+          placeholder='Thread*'
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={
@@ -95,7 +105,7 @@ const createThread = () => {
             width='100%'
             sx={{
               border: '2px solid #9D2235',
-              borderRadius: '10px',
+              mb: 1.5,
             }}
             alt=''
             src={itemimage}></Grid>

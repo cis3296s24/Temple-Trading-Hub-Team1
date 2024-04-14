@@ -13,22 +13,16 @@ import Image from 'next/image';
 import AddIcon from '@mui/icons-material/Add';
 import Link from 'next/link';
 import { UserAuth } from '@context/AuthContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import TextField from '@mui/material/TextField';
-import {
-  Typography,
-  CardActions,
-  CardHeader,
-  AppBar,
-  Toolbar,
-  Fab,
-} from '@mui/material';
+import { AppBar, Toolbar, Fab, Container } from '@mui/material';
 import Item from '@components/Item';
 import ItemsList from '../components/ItmesList';
 import img5 from '../Images/used_iphone_xr.webp';
+import useScreenSize from '@hooks/useScreenSize';
 
 const XR = img5.src;
 
@@ -40,60 +34,30 @@ const bull = (
   </Box>
 );
 
-const card = (
-  <React.Fragment>
-    <CardHeader title={'testing'} />
-    <CardContent>
-      <Image src={XR} alt='Item Image' width={200} height={200} />
-      <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-        Word of the Day
-      </Typography>
-      <Typography variant='h5' component='div'>
-        be{bull}nev{bull}o{bull}lent
-      </Typography>
-      <Typography sx={{ mb: 1.5 }} color='text.secondary'>
-        adjective
-      </Typography>
-      <Typography variant='body2'>
-        well meaning and kindly.
-        <br />
-        {'"a benevolent smile"'}
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <Button size='small'>Learn More</Button>
-    </CardActions>
-  </React.Fragment>
-);
-
 const trading = () => {
   const { user } = UserAuth();
+  const [cols, setCols] = useState(3);
+  const screenSize = useScreenSize();
 
-  useEffect(() => {}, [user]);
+  useEffect(() => {
+    if (screenSize.width > 1000) {
+      setCols(3);
+    } else if (screenSize.width < 760) {
+      setCols(1);
+    } else {
+      setCols(2);
+    }
+  }, [screenSize.width, user]);
+
   return (
-    <div>
-      <Box sx={{ width: 'auto', height: 'auto', overflowY: 'scroll' }}>
-        <ImageList variant='masonry' cols={1} gap={8}>
-          <div className={styles.trading}>
+    <Container maxWidth='lg' sx={{ padding: '30px' }}>
+      <ImageList variant='masonry' cols={cols} gap={10}>
+        {/* <div className={styles.trading}>
             What are you looking for?
-            <TextField
-              id='filled-basic'
-              className={styles.outlinedTextField}
-              label='Filled'
-              variant='filled'
-            />
-          </div>
-          <div className={styles.trading_content}>
-            <Card variant='outlined'>{card}</Card>
-            <Item
-              imageUrl={XR}
-              item_name='Plato complete works'
-              item_condition='Good Condition'
-            />
-            <ItemsList />
-          </div>
-        </ImageList>
-      </Box>
+            <TextField id='filled-basic' variant='outlined' />
+  </div> */}
+        <ItemsList />
+      </ImageList>
       {user && (
         <AppBar
           position='fixed'
@@ -102,16 +66,16 @@ const trading = () => {
           <Toolbar>
             <Box sx={{ flexGrow: 1 }} />
             <Link href={'/createtrade'}>
-              <Fab variant='extended' color='secondary'>
+              <Button color='primary' variant='contained'>
                 <AddIcon sx={{ mr: 1 }} />
-                Create Thread
-              </Fab>
+                Create Trade
+              </Button>
             </Link>
             <Box sx={{ flexGrow: 1 }} />
           </Toolbar>
         </AppBar>
       )}
-    </div>
+    </Container>
   );
 };
 

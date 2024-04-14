@@ -2,8 +2,13 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Topbar from '@components/Topbar';
+import NavBar from '@components/NavBar';
 import './globals.css';
 import { AuthContextProvider } from './context/AuthContext';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import theme from './theme';
+
+const darkTheme = createTheme(theme('dark'));
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,10 +20,12 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <AuthContextProvider>
-          <Topbar />
-          {children}
-        </AuthContextProvider>
+        <ThemeProvider theme={darkTheme}>
+          <AuthContextProvider>
+            <NavBar />
+            {children}
+          </AuthContextProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
