@@ -4,6 +4,7 @@ import {
   Box,
   Container,
   Fab,
+  Button,
   ImageList,
   ImageListItem,
   Toolbar,
@@ -53,7 +54,6 @@ const Threads = () => {
         <ImageList variant='masonry' cols={cols} gap={10}>
           {
             threads.map((doc) => {
-              console.log(doc)
               return (
                 <ImageListItem key={doc.uid}>
                   <ThreadsCard doc={doc} />
@@ -71,10 +71,10 @@ const Threads = () => {
           <Toolbar>
             <Box sx={{ flexGrow: 1 }} />
             <Link href={'/threads/create'}>
-              <Fab variant='extended' color='secondary'>
+              <Button color='primary' variant='contained'>
                 <AddIcon sx={{ mr: 1 }} />
                 Create Thread
-              </Fab>
+              </Button>
             </Link>
             <Box sx={{ flexGrow: 1 }} />
           </Toolbar>

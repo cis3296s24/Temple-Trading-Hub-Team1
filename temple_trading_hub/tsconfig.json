@@ -22,7 +22,7 @@
     }
   },
 
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/context/AuthContext.js", "src/app/api/auth/signup/route.js", "src/app/threads/page.jsx", "src/app/components/ThreadsCard.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/context/AuthContext.js", "src/app/api/auth/signup/route.js", "src/app/threads/page.jsx", "src/app/components/ThreadsCard.tsx", "src/app/createtrade/page.tsx"],
 
   "exclude": ["node_modules"]
 }

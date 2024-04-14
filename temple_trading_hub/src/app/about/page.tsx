@@ -1,9 +1,10 @@
+import { Container } from '@mui/material';
 import '../styles/About.css';
 import React from 'react';
 
 const About = () => {
   return (
-    <div className='about-container'>
+    <Container className='about-container' maxWidth='lg'>
       <h1>About Temple University Trading Hub</h1>
       <p>
         Temple University Trading is a place where students are able to Buy and
@@ -27,7 +28,7 @@ const About = () => {
         <img src='/images/Owl.png' alt='Owl' className='owl-image' />{' '}
         {/* Using relative path to the image */}
       </div>
-    </div>
+    </Container>
   );
 };
 export default About;
