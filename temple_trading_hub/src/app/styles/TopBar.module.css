@@ -25,8 +25,8 @@
 }
 
 .section2 {
-    border-top: 56px solid #A31F37;
-    border-right: 56px solid transparent;
+    border-top: 65px solid #A31F37;
+    border-right: 65px solid transparent;
 }
 
 .topButtons {
@@ -60,7 +60,10 @@
     font-size: 30px;
     transition: all 0.2s ease;
     background-color: transparent;
-    
+}
+
+.barContent{
+    max-width: 100%;
 }
 
 

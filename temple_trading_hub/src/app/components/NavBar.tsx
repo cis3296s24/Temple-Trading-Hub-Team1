@@ -54,9 +54,9 @@ function NavBar() {
           boxShadow: 0,
           bgcolor: 'transparent',
           backgroundImage: 'none',
-          mt: 2,
+          mt: 0,
         }}>
-        <Container maxWidth='lg'>
+        <Container maxWidth='lg' className={styles.barContent}>
           <Toolbar
             variant='regular'
             sx={(theme) => ({
@@ -66,11 +66,11 @@ function NavBar() {
               flexShrink: 0,
               bgcolor:
                 theme.palette.mode === 'light'
-                  ? 'rgba(255, 255, 255, 0.4)'
-                  : 'rgba(0, 0, 0, 0.4)',
-              backdropFilter: 'blur(24px)',
+                  ? 'rgba(255, 255, 255, 0)'
+                  : 'rgba(0, 0, 0, 0)',
+              backdropFilter: 'blur(80px)',
               maxHeight: 40,
-              border: '1px solid',
+              border: 'none',
               borderColor: 'divider',
               boxShadow:
                 theme.palette.mode === 'light'
@@ -92,7 +92,8 @@ function NavBar() {
                   className={styles.vercelLogo}
                   style={{
                     marginRight: '5px',
-                    marginLeft: '-8px',
+                    marginLeft: '-7px',
+                    height: '100%',
                   }}
                   width={100}
                   height={100}
