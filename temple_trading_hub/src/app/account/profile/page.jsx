@@ -68,7 +68,7 @@ const profile = () => {
 
   
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', }}>
       <Box sx={{ width: '30%', marginRight: '2rem', mt: '-10rem' }}>
         <Avatar 
           sx={{ bgcolor: '#A31F37', color: 'white', mr: 1, width: 100, height: 100,  fontSize: '3rem', }}
@@ -96,6 +96,8 @@ const profile = () => {
                 </span>
                 <br/>
                 <br/>
+                {/* <h1>Name: <span id={styles.info}>{user?.uname ? user.uname : null}</span></h1>
+                <br/> */}
                 <h1>Email: <span id={styles.info}>{user?.email ? user.email : null}</span></h1>
                 <br/>
                 <h1>User ID: <span id={styles.info}>{user?.uid ? user.uid : null}</span></h1>
