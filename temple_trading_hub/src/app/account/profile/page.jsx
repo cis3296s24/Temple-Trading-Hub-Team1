@@ -61,7 +61,8 @@ const profile = () => {
         </Avatar>
         <RadioGroup value={selectedOption} onChange={handleOptionChange}>
           <FormControlLabel value="basic" control={<Radio />} label="Basic Info" />
-          <FormControlLabel value="details" control={<Radio />} label="Your Itmes" />
+          <FormControlLabel value="items" control={<Radio />} label="Your Items" />
+          <FormControlLabel value="threads" control={<Radio />} label="Your Threads" />
           {/* Add more options as needed */}
         </RadioGroup>
       </Box>
@@ -75,11 +76,16 @@ const profile = () => {
                 <h1>User ID: {user?.userId ? user.userId : null}</h1>
               </div>
             )}
-            {selectedOption === 'details' && (
+            {selectedOption === 'items' && (
               <div>
                 <ImageList variant='masonry' cols={cols} gap={10}>
                   <ItemsList />
                 </ImageList>
+              </div>
+            )}
+            {selectedOption === 'threads' && (
+              <div>
+                <h1>Your Threads</h1>
               </div>
             )}
         </Box>
