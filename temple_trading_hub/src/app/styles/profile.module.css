@@ -6,7 +6,11 @@
     margin-top: 2rem;
   }
 
-  /* .Avatar{
-    transform: scale(2.0);
+  #info {
+    white-space: nowrap;
+    font-size: 23px;
   }
-   */
+
+  /* #your_info{
+    margin-left: .5rem;
+  } */
