@@ -1,3 +1,4 @@
+import styles from '../Styles/TopBar.module.css';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
@@ -13,9 +14,9 @@ import { UserAuth } from '@context/AuthContext';
 import { useEffect, useState } from 'react';
 import logo from '@Images/temple-logo.svg';
 import Link from 'next/link';
-import styles from '../Styles/TopBar.module.css';
 import Image from 'next/image';
 import { Avatar, IconButton, Menu, Tooltip } from '@mui/material';
+import { start } from 'repl';
 
 const settings = ['Profile', 'Logout'];
 
@@ -56,7 +57,7 @@ function NavBar() {
           backgroundImage: 'none',
           mt: 0,
         }}>
-        <Container maxWidth='lg' className={styles.barContent}>
+        
           <Toolbar
             variant='regular'
             sx={(theme) => ({
@@ -68,8 +69,8 @@ function NavBar() {
                 theme.palette.mode === 'light'
                   ? 'rgba(255, 255, 255, 0)'
                   : 'rgba(0, 0, 0, 0)',
-              backdropFilter: 'blur(80px)',
-              maxHeight: 40,
+              backdropFilter: 'blur(100px)',
+              maxHeight: 60,
               border: 'none',
               borderColor: 'divider',
               boxShadow:
@@ -103,19 +104,25 @@ function NavBar() {
               </Link>
               <div className={styles.section2}></div>
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                <MenuItem sx={{ py: '6px', px: '12px' }}>
+                <MenuItem sx={{ py: '11px', px: '15px' }}>
                   <Typography variant='body2' color='text.primary'>
-                    <Link href={'/trading'}>Trading</Link>
+                      <Button className={styles.buttonstyle} variant='text'>
+                        <Link href={'/trading'}>Trading</Link>
+                      </Button>
+                  </Typography>
+                </MenuItem>
+                <MenuItem sx={{ py: '11px', px: '15px' }}>
+                  <Typography variant='body2' color='text.primary'>
+                    <Button className={styles.buttonstyle} variant='text'>
+                       <Link href={'/threads'}>Threads</Link>
+                    </Button>
                   </Typography>
                 </MenuItem>
                 <MenuItem sx={{ py: '6px', px: '12px' }}>
                   <Typography variant='body2' color='text.primary'>
-                    <Link href={'/threads'}>Threads</Link>
-                  </Typography>
-                </MenuItem>
-                <MenuItem sx={{ py: '6px', px: '12px' }}>
-                  <Typography variant='body2' color='text.primary'>
+                  <Button className={styles.buttonstyle} variant='text'>
                     <Link href={'/about'}>About Us</Link>
+                  </Button>
                   </Typography>
                 </MenuItem>
               </Box>
@@ -249,7 +256,7 @@ function NavBar() {
               </Drawer>
             </Box>
           </Toolbar>
-        </Container>
+        
       </AppBar>
     </div>
   );
