@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .productTitle {
+    font-size: 1.5rem;
+    margin-top: 45px;
+    text-shadow: 5px 5px 10px #911f1f;
+    text-align: center;
+    margin-bottom: 45px;
+  }
+  
+  .productContent {
+    margin-top: 20px;
+    width: 80%;
+  }
+  
+  .productImage {
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+  
+
+  .productDetails {
+    font-size:2.5rem;
+    margin-bottom: 15px;
+  }
