@@ -108,7 +108,7 @@ const ProductPage = ({ params }: any) => {
             href={`mailto:${product && product.userEmail}`}>
             Contact User
           </Button>
-          
+          {/* @ts-ignore */}
           {user && product && (user.uid === product.userID) ? (
           <Link
           href={{
