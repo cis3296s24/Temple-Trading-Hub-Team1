@@ -1,3 +1,4 @@
+'use client';
 import styles from '../Styles/TopBar.module.css';
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -16,7 +17,9 @@ import logo from '@Images/temple-logo.svg';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Avatar, IconButton, Menu, Tooltip } from '@mui/material';
+import customTheme from '../styles/customTheme'; // Import your custom theme
 import { start } from 'repl';
+import { ThemeProvider } from '@mui/material/styles';
 
 const settings = ['Profile', 'Logout'];
 
@@ -104,27 +107,29 @@ function NavBar() {
               </Link>
               <div className={styles.section2}></div>
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                <MenuItem sx={{ py: '11px', px: '15px' }}>
-                  <Typography variant='body2' color='text.primary'>
+                <ThemeProvider theme={customTheme}>
+                    <MenuItem disableRipple sx={{ py: '11px', px: '15px' }}>
+                      <Typography variant='body2' color='text.primary'>
+                          <Button className={styles.buttonstyle} variant='text'>
+                            <Link href={'/trading'}>Trading</Link>
+                          </Button>
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem disableRipple sx={{ py: '11px', px: '15px' }}>
+                      <Typography variant='body2' color='text.primary'>
+                        <Button className={styles.buttonstyle} variant='text'>
+                          <Link href={'/threads'}>Threads</Link>
+                        </Button>
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem disableRipple sx={{ py: '6px', px: '12px' }}>
+                      <Typography variant='body2' color='text.primary'>
                       <Button className={styles.buttonstyle} variant='text'>
-                        <Link href={'/trading'}>Trading</Link>
+                        <Link href={'/about'}>About Us</Link>
                       </Button>
-                  </Typography>
-                </MenuItem>
-                <MenuItem sx={{ py: '11px', px: '15px' }}>
-                  <Typography variant='body2' color='text.primary'>
-                    <Button className={styles.buttonstyle} variant='text'>
-                       <Link href={'/threads'}>Threads</Link>
-                    </Button>
-                  </Typography>
-                </MenuItem>
-                <MenuItem sx={{ py: '6px', px: '12px' }}>
-                  <Typography variant='body2' color='text.primary'>
-                  <Button className={styles.buttonstyle} variant='text'>
-                    <Link href={'/about'}>About Us</Link>
-                  </Button>
-                  </Typography>
-                </MenuItem>
+                      </Typography>
+                    </MenuItem>
+                  </ThemeProvider>
               </Box>
             </Box>
             <Box

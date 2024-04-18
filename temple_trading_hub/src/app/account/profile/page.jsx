@@ -6,13 +6,12 @@ import { Avatar, IconButton, Tooltip, Box, Radio, RadioGroup, FormControlLabel, 
 import { UserAuth } from '@context/AuthContext';
 import { useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, where, getFirestore, query } from 'firebase/firestore';
 import { db } from '@firebase';
 import ItemsList from '../../components/ItmesList';
 import ImageList from '@mui/material/ImageList';
 import useScreenSize from '@hooks/useScreenSize';
 import ThreadsCard from '@components/ThreadsCard';
-
 
 
 
@@ -44,16 +43,26 @@ const profile = () => {
 
   useEffect(() => {
     const getThreads = async () => {
-      const querySnapshot = await getDocs(collection(db, 'threads'));
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        const temp = doc.data();
-        data.push(temp);
-      });
-      setThreads(data);
+      try {
+        if (!user || !user.uid) {
+          //User is not authenticated or user.uid is null
+          return;
+        }
+  
+        const db = getFirestore();
+        const threadsCollection = collection(db, 'threads');
+        const q = query(threadsCollection, where('userID', '==', user.uid));
+        const querySnapshot = await getDocs(q);
+        const data = querySnapshot.docs.map((doc) => doc.data());
+        setThreads(data);
+      } catch (error) {
+        console.error('Error fetching threads:', error);
+      }
     };
+  
     getThreads();
-  }, []);
+  }, [user]); //Runs effect whenever user object changes
+  
 
 
   useEffect(() => {
@@ -68,7 +77,7 @@ const profile = () => {
 
   
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', }}>
       <Box sx={{ width: '30%', marginRight: '2rem', mt: '-10rem' }}>
         <Avatar 
           sx={{ bgcolor: '#A31F37', color: 'white', mr: 1, width: 100, height: 100,  fontSize: '3rem', }}
@@ -96,6 +105,8 @@ const profile = () => {
                 </span>
                 <br/>
                 <br/>
+                {/* <h1>Name: <span id={styles.info}>{user?.uname ? user.uname : null}</span></h1>
+                <br/> */}
                 <h1>Email: <span id={styles.info}>{user?.email ? user.email : null}</span></h1>
                 <br/>
                 <h1>User ID: <span id={styles.info}>{user?.uid ? user.uid : null}</span></h1>
@@ -104,7 +115,7 @@ const profile = () => {
             {selectedOption === 'items' && (
               <div>
                 <ImageList variant='masonry' cols={cols} gap={10}>
-                  <ItemsList />
+                  <ItemsList userID={user?.uid ? user.uid : null} />
                 </ImageList>
               </div>
             )}
