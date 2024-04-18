@@ -9,6 +9,8 @@ import guitar from './Images/A_guitar.jpg';
 import airpods from './Images/airpods.webp';
 // import img4 from './Images/worn_Vans.webp';
 // import img5 from './Images/used_iphone_xr.webp';
+import brad from './images/brad.webp';
+import angelina from './images/angelina.webp';
 import React from 'react';
 import { Container, CssBaseline, Box, Avatar, Stack, Button, Typography } from '@mui/material';
 
@@ -16,6 +18,8 @@ import { Container, CssBaseline, Box, Avatar, Stack, Button, Typography } from '
 const Vans = vans.src;
 const Guitar = guitar.src;
 const Airpods = airpods.src;
+const Brad = brad.src;
+const Angelina = angelina.src;
 // const Sweater = img3.src;
 // const vans = img4.src;
 // const XR = img5.src;
@@ -80,26 +84,37 @@ function ElegantSite() {
         </Button> */}
       </Container>
 
+
+
       {/* Testimonials */}
       <Container maxWidth="md" sx={{ marginTop: 3 }}>
         <Typography variant="h4" sx={{ marginBottom: 3 }}>
           Testimonials
         </Typography>
-        <Box sx={{ backgroundColor: '#333', padding: '20px', borderRadius: '10px', marginBottom: 2 }}>
-          <Typography variant="body1" sx={{ fontStyle: 'italic', marginBottom: 1 }}>
-            "What a great way to trade items on-campus!"
-          </Typography>
-          <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-            - John Doe
-          </Typography>
+        {/* Testimonial 1 */}
+        <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+          <Avatar alt="Brad Pitt" src={Brad} sx={{ marginRight: 2 }} />
+          <Box sx={{ backgroundColor: '#333', padding: '20px', borderRadius: '10px', width: '100%' }}>
+            <Typography variant="body1" sx={{ fontStyle: 'italic', marginBottom: 1 }}>
+              "What a great way to trade items on-campus!"
+            </Typography>
+            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+              - Brad Pitt
+            </Typography>
+          </Box>
         </Box>
-        <Box sx={{ backgroundColor: '#333', padding: '20px', borderRadius: '10px', marginBottom: 2 }}>
-          <Typography variant="body1" sx={{ fontStyle: 'italic', marginBottom: 1 }}>
-            "It's so easy to find the items that I wanted!"
-          </Typography>
-          <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
-            - Jane Smith
-          </Typography>
+
+        {/* Testimonial 2 */}
+        <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+          <Avatar alt="Angelina Jolie" src={Angelina} sx={{ marginRight: 2 }} />
+          <Box sx={{ backgroundColor: '#333', padding: '20px', borderRadius: '10px', width: '100%' }}>
+            <Typography variant="body1" sx={{ fontStyle: 'italic', marginBottom: 1 }}>
+              "It's so easy to find the items that I wanted!"
+            </Typography>
+            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+              - Angelina Jolie
+            </Typography>
+          </Box>
         </Box>
       </Container>
     </React.Fragment>
