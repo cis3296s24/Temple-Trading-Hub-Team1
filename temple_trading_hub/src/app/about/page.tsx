@@ -8,21 +8,11 @@ const About = () => {
       <h1>About Temple University Trading Hub</h1>
       <p>
         Temple University Trading is a place where students are able to Buy and
-        Sell
-      </p>
-      <p>
-        with each other in a known and safe enviroment. This is a website that
-        is meant
-      </p>
-      <p>
-        only with students and employees with a temple email address. Trading
-        will be done
-      </p>
-      <p>
-        in a safe designated area around and on campus. We want to make it
-        easier for
-      </p>
-      <p>everyone to buy and sell goods with certainty.</p>
+        Sell their goods with each other in a safe environment. This is a website that
+        is meant to be used only by students and employees with a valid Temple email address. Trades will
+        occur in designated safe areas located on-campus. We want to make it
+        easier for everyone to buy and sell goods safely.</p>
+      <p></p>
       <p>Join our Owl Trading Community Today!</p>
       <div className='image-container'>
         <img src='/images/Owl.png' alt='Owl' className='owl-image' />{' '}
