@@ -1,18 +1,21 @@
 //import Image from "next/image";
-import './Styles/global.css';
+import './styles/global.css';
 import './styles/About.css';
 import '@fontsource/kadwa/700.css';
 // import Item from '@components/ItemEx';
 // import img1 from './images/plato_complete_works.jpg';
-// import RevHoodie from './images/Revenge_Hoodie.webp';
-// import img2 from './images/Stanley_cup_pic.jpg';
-// import img3 from './Images/sweater_for_Trade.webp';
+import vans from './Images/worn_Vans.webp';
+import guitar from './Images/A_guitar.jpg';
+import airpods from './Images/airpods.webp';
 // import img4 from './Images/worn_Vans.webp';
 // import img5 from './Images/used_iphone_xr.webp';
-import { Container } from '@mui/material';
-// const Rev = RevHoodie.src;
-// const Plato = img1.src;
-// const StanleyCup = img2.src;
+import React from 'react';
+import { Container, CssBaseline, Box, Avatar, Stack, Button, Typography } from '@mui/material';
+
+
+const Vans = vans.src;
+const Guitar = guitar.src;
+const Airpods = airpods.src;
 // const Sweater = img3.src;
 // const vans = img4.src;
 // const XR = img5.src;
@@ -20,7 +23,89 @@ import { Container } from '@mui/material';
 //import Button from '@mui/material/Button';
 
 //testing
-function Hub() {
+
+// Example hero image - replace with your specific image
+//import heroImage from './Images/';
+
+function ImageAvatars() {
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <Container maxWidth="xl" sx={{
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundImage: `url(${heroImage.src})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        color: 'white',
+        textAlign: 'center',
+        padding: 4
+      }}>
+        {/* Hero Text */}
+        <Typography variant="h2" component="h1" gutterBottom sx={{ fontWeight: 'bold', fontSize: '3rem' }}>
+          Discover Amazing Products
+        </Typography>
+        <Typography variant="h5" sx={{ marginBottom: 4 }}>
+          Explore the world of unique and inspiring items
+        </Typography>
+
+        {/* Call to Action Button */}
+        <Button variant="contained" color="primary" size="large">
+          Shop Now
+        </Button>
+      </Container>
+    </React.Fragment>
+  );
+}
+
+export default ImageAvatars;
+
+
+
+
+// function ImageAvatars() {
+//   return (
+//     <Stack direction="row" spacing={2}>
+//       <React.Fragment>
+//         <CssBaseline />
+//         <Container maxWidth="sm" sx={{
+//           display: 'flex',       // Makes the container a flex container
+//           flexDirection: 'column', // Stack children vertically
+//           alignItems: 'center',  // Center horizontally
+//           justifyContent: 'center', // Center vertically
+//           height: '200vh'         // Use full viewport height
+//         }}>
+
+//           {/* Box with rounded corners */}
+//           <Box sx={{
+//             bgcolor: '#e89d1e',
+//             width: '100%',
+//             display: 'flex',
+//             justifyContent: 'center',
+//             alignItems: 'top',
+//             padding: 2,
+//             borderRadius: '16px'  // Rounded corners, adjust this value as needed
+//           }}>
+//             <Avatar alt="Worn Vans" src={vans.src} sx={{ width: 100, height: 100 }} />
+//             <Avatar alt="A Guitar" src={guitar.src} sx={{ width: 100, height: 100 }} />
+//             <Avatar alt="Airpods" src={airpods.src} sx={{ width: 100, height: 100 }} />
+//           </Box>
+
+//         </Container>
+//       </React.Fragment>
+//     </Stack>
+    
+//   );
+
+  
+// }
+// export default ImageAvatars; 
+ 
+
+/* function Hub() {
   return (
     // <main className={styles.Hello}>
     //   <div className={styles.upper_content}>
@@ -72,7 +157,7 @@ function Hub() {
     <Container className='about-container' maxWidth='lg'>
       <div className='about-container'>
         <h1>
-          Trading made <span>Simple</span>
+          Trading made <span>SIMPLE</span>
         </h1>
         <h1>
           Trading made <span>Safe</span>
@@ -83,6 +168,6 @@ function Hub() {
       </div>
     </Container>
   );
-}
+} */
 
-export default Hub;
+//export default Hub;
