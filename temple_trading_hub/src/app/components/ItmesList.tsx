@@ -11,7 +11,7 @@ import Item from './Item';
 import { DocumentData } from 'firebase/firestore';
 import { ImageListItem } from '@mui/material';
 
-const ItemsList = () => {
+const ItemsList = ({ userID }: { userID?: string }) => {
   const [items, setItems] = useState<DocumentData[]>([]);
 
   useEffect(() => {
@@ -19,12 +19,11 @@ const ItemsList = () => {
       try {
         const db = getFirestore();
         const itemsCollection = collection(db, 'listings');
-        const querySnapshot = await getDocs(
-          query(
-            itemsCollection,
-            where('userID', '==', 'IT7O6fATWOhMKz57HonJJ8g6ZrF2')
-          )
-        );
+        let q = query(itemsCollection);
+        if (userID) {
+          q = query(itemsCollection, where('userID', '==', userID));
+        }
+        const querySnapshot = await getDocs(q);
         console.log('Query snapshot:', querySnapshot);
         const itemsData = querySnapshot.docs.map((doc) => ({
           id: doc.id,
@@ -44,7 +43,7 @@ const ItemsList = () => {
     };
 
     fetchItems();
-  }, []);
+  }, [userID]);
 
   return (
     <React.Fragment>

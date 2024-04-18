@@ -6,13 +6,12 @@ import { Avatar, IconButton, Tooltip, Box, Radio, RadioGroup, FormControlLabel, 
 import { UserAuth } from '@context/AuthContext';
 import { useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, where, getFirestore, query } from 'firebase/firestore';
 import { db } from '@firebase';
 import ItemsList from '../../components/ItmesList';
 import ImageList from '@mui/material/ImageList';
 import useScreenSize from '@hooks/useScreenSize';
 import ThreadsCard from '@components/ThreadsCard';
-
 
 
 
@@ -44,16 +43,26 @@ const profile = () => {
 
   useEffect(() => {
     const getThreads = async () => {
-      const querySnapshot = await getDocs(collection(db, 'threads'));
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        const temp = doc.data();
-        data.push(temp);
-      });
-      setThreads(data);
+      try {
+        if (!user || !user.uid) {
+          //User is not authenticated or user.uid is null
+          return;
+        }
+  
+        const db = getFirestore();
+        const threadsCollection = collection(db, 'threads');
+        const q = query(threadsCollection, where('userID', '==', user.uid));
+        const querySnapshot = await getDocs(q);
+        const data = querySnapshot.docs.map((doc) => doc.data());
+        setThreads(data);
+      } catch (error) {
+        console.error('Error fetching threads:', error);
+      }
     };
+  
     getThreads();
-  }, []);
+  }, [user]); //Runs effect whenever user object changes
+  
 
 
   useEffect(() => {
@@ -106,7 +115,7 @@ const profile = () => {
             {selectedOption === 'items' && (
               <div>
                 <ImageList variant='masonry' cols={cols} gap={10}>
-                  <ItemsList />
+                  <ItemsList userID={user?.uid ? user.uid : null} />
                 </ImageList>
               </div>
             )}
