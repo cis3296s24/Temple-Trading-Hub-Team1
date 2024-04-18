@@ -39,13 +39,14 @@ const trading = () => {
   }, [screenSize.width, user]);
 
   return (
-    <Container maxWidth='lg' sx={{ padding: '30px' }}>
+    <Container maxWidth='lg' sx={{ padding: '30px', mt: 1 }}>
       <ToggleButtonGroup
       color="primary"
       value={selectedCategory}
       exclusive
       onChange={handleChange}
       aria-label="Platform"
+      sx={{ flexDirection: 'row', flexWrap: 'wrap' }}
       >
         <ToggleButton value="all">All</ToggleButton>
         <ToggleButton value="electronics">Electronics</ToggleButton>
