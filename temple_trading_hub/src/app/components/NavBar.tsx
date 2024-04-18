@@ -1,3 +1,5 @@
+'use client';
+import styles from '../Styles/TopBar.module.css';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
@@ -13,9 +15,11 @@ import { UserAuth } from '@context/AuthContext';
 import { useEffect, useState } from 'react';
 import logo from '@Images/temple-logo.svg';
 import Link from 'next/link';
-import styles from '../Styles/TopBar.module.css';
 import Image from 'next/image';
 import { Avatar, IconButton, Menu, Tooltip } from '@mui/material';
+import customTheme from '../styles/customTheme'; // Import your custom theme
+import { start } from 'repl';
+import { ThemeProvider } from '@mui/material/styles';
 
 const settings = ['Profile', 'Logout'];
 
@@ -54,9 +58,9 @@ function NavBar() {
           boxShadow: 0,
           bgcolor: 'transparent',
           backgroundImage: 'none',
-          mt: 2,
+          mt: 0,
         }}>
-        <Container maxWidth='lg'>
+        
           <Toolbar
             variant='regular'
             sx={(theme) => ({
@@ -66,11 +70,11 @@ function NavBar() {
               flexShrink: 0,
               bgcolor:
                 theme.palette.mode === 'light'
-                  ? 'rgba(255, 255, 255, 0.4)'
-                  : 'rgba(0, 0, 0, 0.4)',
-              backdropFilter: 'blur(24px)',
-              maxHeight: 40,
-              border: '1px solid',
+                  ? 'rgba(255, 255, 255, 0)'
+                  : 'rgba(0, 0, 0, 0)',
+              backdropFilter: 'blur(100px)',
+              maxHeight: 60,
+              border: 'none',
               borderColor: 'divider',
               boxShadow:
                 theme.palette.mode === 'light'
@@ -92,7 +96,8 @@ function NavBar() {
                   className={styles.vercelLogo}
                   style={{
                     marginRight: '5px',
-                    marginLeft: '-8px',
+                    marginLeft: '-7px',
+                    height: '100%',
                   }}
                   width={100}
                   height={100}
@@ -102,21 +107,29 @@ function NavBar() {
               </Link>
               <div className={styles.section2}></div>
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                <MenuItem sx={{ py: '6px', px: '12px' }}>
-                  <Typography variant='body2' color='text.primary'>
-                    <Link href={'/trading'}>Trading</Link>
-                  </Typography>
-                </MenuItem>
-                <MenuItem sx={{ py: '6px', px: '12px' }}>
-                  <Typography variant='body2' color='text.primary'>
-                    <Link href={'/threads'}>Threads</Link>
-                  </Typography>
-                </MenuItem>
-                <MenuItem sx={{ py: '6px', px: '12px' }}>
-                  <Typography variant='body2' color='text.primary'>
-                    <Link href={'/about'}>About Us</Link>
-                  </Typography>
-                </MenuItem>
+                <ThemeProvider theme={customTheme}>
+                    <MenuItem disableRipple sx={{ py: '11px', px: '15px' }}>
+                      <Typography variant='body2' color='text.primary'>
+                          <Button className={styles.buttonstyle} variant='text'>
+                            <Link href={'/trading'}>Trading</Link>
+                          </Button>
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem disableRipple sx={{ py: '11px', px: '15px' }}>
+                      <Typography variant='body2' color='text.primary'>
+                        <Button className={styles.buttonstyle} variant='text'>
+                          <Link href={'/threads'}>Threads</Link>
+                        </Button>
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem disableRipple sx={{ py: '6px', px: '12px' }}>
+                      <Typography variant='body2' color='text.primary'>
+                      <Button className={styles.buttonstyle} variant='text'>
+                        <Link href={'/about'}>About Us</Link>
+                      </Button>
+                      </Typography>
+                    </MenuItem>
+                  </ThemeProvider>
               </Box>
             </Box>
             <Box
@@ -248,7 +261,7 @@ function NavBar() {
               </Drawer>
             </Box>
           </Toolbar>
-        </Container>
+        
       </AppBar>
     </div>
   );

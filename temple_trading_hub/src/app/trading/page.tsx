@@ -4,40 +4,29 @@ import '../Styles/global.css';
 import styles from '../Styles/trading.module.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 //import { motion, useAnimation } from 'framer-motion';
 import '@fontsource/inter/300.css'; // 300 represents the font weight
 import '@fontsource/jua/400.css';
-import Image from 'next/image';
 import AddIcon from '@mui/icons-material/Add';
 import Link from 'next/link';
 import { UserAuth } from '@context/AuthContext';
 import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import TextField from '@mui/material/TextField';
-import { AppBar, Toolbar, Fab, Container } from '@mui/material';
-import Item from '@components/Item';
+import { AppBar, Toolbar, Container,ToggleButton, ToggleButtonGroup } from '@mui/material';
 import ItemsList from '../components/ItmesList';
-import img5 from '../Images/used_iphone_xr.webp';
 import useScreenSize from '@hooks/useScreenSize';
 
-const XR = img5.src;
-
-const bull = (
-  <Box
-    component='span'
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
-    •
-  </Box>
-);
 
 const trading = () => {
   const { user } = UserAuth();
   const [cols, setCols] = useState(3);
   const screenSize = useScreenSize();
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
+  const handleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: string) => {
+    setSelectedCategory(newAlignment);
+  };
 
   useEffect(() => {
     if (screenSize.width > 1000) {
@@ -51,12 +40,24 @@ const trading = () => {
 
   return (
     <Container maxWidth='lg' sx={{ padding: '30px' }}>
+      <ToggleButtonGroup
+      color="primary"
+      value={selectedCategory}
+      exclusive
+      onChange={handleChange}
+      aria-label="Platform"
+      >
+        <ToggleButton value="all">All</ToggleButton>
+        <ToggleButton value="electronics">Electronics</ToggleButton>
+        <ToggleButton value="Apparel">Apparel</ToggleButton>
+        <ToggleButton value="tools">Tools</ToggleButton>
+        <ToggleButton value="instruments">Instruments</ToggleButton>
+        <ToggleButton value="misc">Miscelleneous</ToggleButton>
+      </ToggleButtonGroup>
+      <br/>
+      <br/>
       <ImageList variant='masonry' cols={cols} gap={10}>
-        {/* <div className={styles.trading}>
-            What are you looking for?
-            <TextField id='filled-basic' variant='outlined' />
-  </div> */}
-        <ItemsList />
+        <ItemsList category={selectedCategory} />
       </ImageList>
       {user && (
         <AppBar
