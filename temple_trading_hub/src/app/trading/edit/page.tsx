@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import * as yup from 'yup'; 
 import { updateTrade } from './updateTrade';
+import { deleteTrade } from "./deleteTrade";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@firebase";
 
@@ -51,6 +52,11 @@ const editTrade = () => {
     const handleChange = (e: SelectChangeEvent) => {
       setCategory(e.target.value);
     };
+
+    const handleDelete = async() => {
+        //@ts-ignore
+        await deleteTrade(user.email, searchParams.get("id"), product.images[0]).then(router.push("/"));
+    }
   
     const router = useRouter();
 
@@ -265,6 +271,11 @@ const editTrade = () => {
             </Button>
           </form>
         </Grid>
+        <Button
+        variant="contained"
+        fullWidth
+        style={{ marginBottom: '150px' }}
+        onClick={handleDelete}>Delete Trade</Button>
       </Grid>
     </Container>
   );
