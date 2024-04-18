@@ -1,4 +1,4 @@
-// ItemsList.js
+// ItemsList.tsx
 import React, { useEffect, useState } from 'react';
 import {
   collection,
@@ -6,32 +6,50 @@ import {
   query,
   getDocs,
   where,
+  Query,
+  DocumentData,
+  Firestore
 } from 'firebase/firestore';
 import Item from './Item';
-import { DocumentData } from 'firebase/firestore';
 import { ImageListItem } from '@mui/material';
 
-const ItemsList = ({ userID, category }: { userID?: string; category?: string }) => {
-  const [items, setItems] = useState<DocumentData[]>([]);
+interface ItemsListProps {
+  userID?: string;
+  category?: string;
+}
+
+interface ItemData {
+  id: string;
+  title: string;
+  price: string;
+  imageUrl: string[];
+  image: string[];
+  description: string;
+  userEmail: string;
+  category: string;
+}
+
+const ItemsList: React.FC<ItemsListProps> = ({ userID, category }) => {
+  const [items, setItems] = useState<ItemData[]>([]);
 
   useEffect(() => {
+    const db: Firestore = getFirestore();
+    const itemsCollection = collection(db, 'listings');
+    let itemsQuery: Query<DocumentData> = query(itemsCollection);
+
+    if (userID) {
+      itemsQuery = query(itemsCollection, where('userID', '==', userID));
+    }
+    if (category && category !== 'all') {
+      itemsQuery = query(itemsCollection, where('category', '==', category));
+    }
+
     const fetchItems = async () => {
       try {
-        const db = getFirestore();
-        const itemsCollection = collection(db, 'listings');
-        let q = query(itemsCollection);
-        if (userID) {
-          q = query(itemsCollection, where('userID', '==', userID));
-        }
-        if (category && category !== 'all') {
-          q = query(itemsCollection, where('category', '==', category));
-        }
-        const querySnapshot = await getDocs(q);
-        console.log('Query snapshot:', querySnapshot);
-        const itemsData = querySnapshot.docs.map((doc) => ({
+        const querySnapshot = await getDocs(itemsQuery);
+        const itemsData = querySnapshot.docs.map(doc => ({
           id: doc.id,
           title: doc.data().title,
-          //   condition: doc.data().condition,
           price: doc.data().price,
           imageUrl: doc.data().imageUrl,
           image: doc.data().images,
@@ -39,7 +57,6 @@ const ItemsList = ({ userID, category }: { userID?: string; category?: string })
           userEmail: doc.data().userEmail,
           category: doc.data().category,
         }));
-        console.log('Items data:', itemsData);
         setItems(itemsData);
       } catch (error) {
         console.error('Error fetching items:', error);
@@ -50,20 +67,20 @@ const ItemsList = ({ userID, category }: { userID?: string; category?: string })
   }, [userID, category]);
 
   return (
-    <React.Fragment>
+    <>
       {items.map((item) => (
         <ImageListItem key={item.id}>
           <Item
-            imageUrl={item.imageUrl?.[0]}
+            imageUrl={item.imageUrl[0]}
             item_name={item.title}
-            image={item.image?.[0]}
+            image={item.image[0]}
             description={item.description}
             userEmail={item.userEmail}
             price={item.price}
           />
         </ImageListItem>
       ))}
-    </React.Fragment>
+    </>
   );
 };
 
