@@ -14,7 +14,12 @@ export const updateTrade = async (user, itemname, description, price, category, 
         price: (price ? price : docData.data().price),
         category: (category ? category : docData.data().category),
         images: (image.name ? [`${docRef.id}+${image.name}`]: "no-image"),
-    })
+    }).catch((error) => {
+        console.log("Update lisitng Error");
+        return new Response("update listing error", {
+            status: 500
+        });
+    });
 
     let link = undefined;
 

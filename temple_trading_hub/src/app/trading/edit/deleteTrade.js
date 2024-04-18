@@ -6,8 +6,8 @@ import { deleteObject, getStorage, ref } from "firebase/storage";
 export const deleteTrade = async (userid, listingid, imagelocationname) => {
     // delete listing
     const deleteListing = await deleteDoc(doc(db, "listings", listingid)).catch((error) => {
-        console.log("Update User Error");
-        return new Response("update user error", {
+        console.log("Update lisitng Error");
+        return new Response("update listing error", {
             status: 500
         });
     });
