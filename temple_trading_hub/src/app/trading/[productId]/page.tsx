@@ -7,10 +7,12 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button, Container } from '@mui/material';
+import { useRouter } from 'next/router';
 
 const ProductPage = ({ params }: any) => {
   const [product, setProduct] = useState();
   const { productId }: any = params;
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -22,6 +24,7 @@ const ProductPage = ({ params }: any) => {
           setProduct(docSnap.data());
         } else {
           console.log('Product not found');
+          router.push('/trading');
         }
       }
     };
