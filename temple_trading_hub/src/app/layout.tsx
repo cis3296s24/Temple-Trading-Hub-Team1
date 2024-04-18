@@ -1,9 +1,9 @@
 'use client';
+import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Topbar from '@components/Topbar';
 import NavBar from '@components/NavBar';
-import './globals.css';
 import { AuthContextProvider } from './context/AuthContext';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import theme from './theme';
