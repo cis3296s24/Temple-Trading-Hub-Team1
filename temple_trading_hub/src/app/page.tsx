@@ -25,43 +25,93 @@ const Airpods = airpods.src;
 //testing
 
 // Example hero image - replace with your specific image
-//import heroImage from './Images/';
+import heroImage from './Images/splashgraphic.jpg';
 
-function ImageAvatars() {
+
+function ElegantSite() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="xl" sx={{
-        height: '100vh',
+      {/* Hero Section */}
+      <Container maxWidth="md" sx={{
+        height: '30vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundImage: `url(${heroImage.src})`,
-        backgroundSize: 'cover',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        color: 'white',
+        color: '#333', // Updated color to match site's theme
         textAlign: 'center',
-        padding: 4
+        padding: 4,
+        borderRadius: '40px',
+        marginBottom: '20px'
       }}>
-        {/* Hero Text */}
-        <Typography variant="h2" component="h1" gutterBottom sx={{ fontWeight: 'bold', fontSize: '3rem' }}>
-          Discover Amazing Products
-        </Typography>
-        <Typography variant="h5" sx={{ marginBottom: 4 }}>
-          Explore the world of unique and inspiring items
-        </Typography>
+    
 
-        {/* Call to Action Button */}
-        <Button variant="contained" color="primary" size="large">
-          Shop Now
-        </Button>
+      </Container>
+
+      {/* Product Showcase */}
+      <Container maxWidth="md">
+        <Typography variant="h4" sx={{ marginBottom: 3 }}>
+          Featured Products
+        </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
+          <Box sx={{ textAlign: 'center' }}>
+            <Avatar alt="Worn Vans" src={Vans} sx={{ width: 150, height: 150, marginBottom: 1 }} />
+            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Worn Vans</Typography>
+            <Typography variant="body2">$49.99</Typography>
+          </Box>
+          <Box sx={{ textAlign: 'center' }}>
+            <Avatar alt="Guitar" src={Guitar} sx={{ width: 150, height: 150, marginBottom: 1 }} />
+            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Acoustic Guitar</Typography>
+            <Typography variant="body2">$199.99</Typography>
+          </Box>
+          <Box sx={{ textAlign: 'center' }}>
+            <Avatar alt="Airpods" src={Airpods} sx={{ width: 150, height: 150, marginBottom: 1 }} />
+            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Apple Airpods</Typography>
+            <Typography variant="body2">$159.99</Typography>
+          </Box>
+        </Box>
+        {/* <Button variant="outlined" color="primary" size="large">
+          View More Products
+        </Button> */}
+      </Container>
+
+      {/* Testimonials */}
+      <Container maxWidth="md" sx={{ marginTop: 3 }}>
+        <Typography variant="h4" sx={{ marginBottom: 3 }}>
+          Testimonials
+        </Typography>
+        <Box sx={{ backgroundColor: '#333', padding: '20px', borderRadius: '10px', marginBottom: 2 }}>
+          <Typography variant="body1" sx={{ fontStyle: 'italic', marginBottom: 1 }}>
+            "What a great way to trade items on-campus!"
+          </Typography>
+          <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+            - John Doe
+          </Typography>
+        </Box>
+        <Box sx={{ backgroundColor: '#333', padding: '20px', borderRadius: '10px', marginBottom: 2 }}>
+          <Typography variant="body1" sx={{ fontStyle: 'italic', marginBottom: 1 }}>
+            "It's so easy to find the items that I wanted!"
+          </Typography>
+          <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+            - Jane Smith
+          </Typography>
+        </Box>
       </Container>
     </React.Fragment>
   );
 }
 
-export default ImageAvatars;
+export default ElegantSite;
+
+
+
+
+
 
 
 
