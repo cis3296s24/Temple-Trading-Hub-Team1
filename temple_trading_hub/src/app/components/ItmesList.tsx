@@ -19,12 +19,7 @@ const ItemsList = () => {
       try {
         const db = getFirestore();
         const itemsCollection = collection(db, 'listings');
-        const querySnapshot = await getDocs(
-          query(
-            itemsCollection,
-            where('userID', '==', 'IT7O6fATWOhMKz57HonJJ8g6ZrF2')
-          )
-        );
+        const querySnapshot = await getDocs(query(itemsCollection));
         console.log('Query snapshot:', querySnapshot);
         const itemsData = querySnapshot.docs.map((doc) => ({
           id: doc.id,
@@ -57,6 +52,7 @@ const ItemsList = () => {
             description={item.description}
             userEmail={item.userEmail}
             price={item.price}
+            id={item.id}
           />
         </ImageListItem>
       ))}
