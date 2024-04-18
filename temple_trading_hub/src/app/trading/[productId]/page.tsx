@@ -113,8 +113,7 @@ const ProductPage = ({ params }: any) => {
           <Link
           href={{
             pathname: '../trading/edit/',
-            query: {id: productId,
-            }
+            query: {id: productId}
           }}
         >
           Edit Trade
