@@ -6,9 +6,13 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Button, Container } from '@mui/material';
+import { Button, Container} from '@mui/material';
+import { UserAuth } from '@context/AuthContext';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const ProductPage = ({ params }: any) => {
+  const { user } = UserAuth();
   const [product, setProduct] = useState();
   const { productId }: any = params;
 
@@ -28,6 +32,11 @@ const ProductPage = ({ params }: any) => {
 
     fetchProduct();
   }, []);
+  const router = useRouter();
+  const routeToEdit = (product: any) => {
+    
+    router.push("/trading/edit");
+  }
 
   return (
     <Container maxWidth='lg' sx={{ padding: '30px' }}>
@@ -65,31 +74,52 @@ const ProductPage = ({ params }: any) => {
         </CardContent>
       </Card> */}
       <Card>
-        {product && product.imageUrl && (
+        {product && //@ts-ignore
+        product.imageUrl && (
           <CardMedia
             component='img'
-            image={product && product.imageUrl}
-            alt={product && product.image}
+            image={product && //@ts-ignore
+              product.imageUrl}
+            alt={product && //@ts-ignore
+            product.image}
           />
         )}
         <CardContent>
           <Typography variant='h2' color='text.secondary'>
-            {product && product.title}
+            {product && //@ts-ignore
+            product.title}
           </Typography>
           <Typography variant='h6' color='text.secondary'>
-            Description: {product && product.description}
+            Description: {product && 
+            //@ts-ignore 
+            product.description}
           </Typography>
           <Typography variant='h6' color='text.secondary'>
-            Price: {product && product.price}
+            
+            Price: {product && //@ts-ignore 
+            product.price}
           </Typography>
           <Button
             sx={{ marginTop: 2 }}
             color='primary'
             variant='contained'
             fullWidth
+            //@ts-ignore
             href={`mailto:${product && product.userEmail}`}>
             Contact User
           </Button>
+          
+          {user && product && (user.uid === product.userID) ? (
+          <Link
+          href={{
+            pathname: '../trading/edit/',
+            query: {id: productId,
+            }
+          }}
+        >
+          Edit Trade
+        </Link>
+        ): null}
         </CardContent>
       </Card>
     </Container>
