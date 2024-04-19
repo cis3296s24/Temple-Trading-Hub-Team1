@@ -28,8 +28,10 @@ export const updateTrade = async (user, itemname, description, price, category, 
         const imageLocation = `listingImages/${docRef.id}+${image.name}`;
 
         // delete old image
-        const listingFile = ref(storage, `listingImages/${docData.data().images[0]}`);
-        await deleteObject(listingFile);
+        if(docData.data().images !== "no-image"){
+            const listingFile = ref(storage, `listingImages/${docData.data().images[0]}`);
+            await deleteObject(listingFile);
+        }
 
         const storageRef = ref(storage, imageLocation);
         await uploadBytes(storageRef, image);
