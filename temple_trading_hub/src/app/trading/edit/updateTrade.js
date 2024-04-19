@@ -22,6 +22,7 @@ export const updateTrade = async (
   const docData = await getDoc(docRef);
 
   // delete old image
+  const storage = getStorage();
   if (docData.data().images !== 'no-image') {
     const listingFile = ref(
       storage,
@@ -46,7 +47,6 @@ export const updateTrade = async (
   let link = undefined;
 
   if (image.name) {
-    const storage = getStorage();
     const imageLocation = `listingImages/${docRef.id}+${image.name}`;
 
     const storageRef = ref(storage, imageLocation);
