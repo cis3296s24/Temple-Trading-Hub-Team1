@@ -51,7 +51,8 @@ function ElegantSite() {
         textAlign: 'center',
         padding: 4,
         borderRadius: '40px',
-        marginBottom: '20px'
+        marginBottom: '20px',
+        marginTop: '60px'
       }}>
     
 
@@ -62,7 +63,7 @@ function ElegantSite() {
         <Typography variant="h4" sx={{ marginBottom: 3 }}>
           Featured Products
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3, marginTop: 3 }}>
           <Box sx={{ textAlign: 'center' }}>
             <Avatar alt="Worn Vans" src={Vans} sx={{ width: 150, height: 150, marginBottom: 1 }} />
             <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Worn Vans</Typography>
@@ -103,7 +104,7 @@ function ElegantSite() {
             </Typography>
           </Box>
         </Box>
-
+ 
         {/* Testimonial 2 */}
         <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
           <Avatar alt="Angelina Jolie" src={Angelina} sx={{ marginRight: 2 }} />
