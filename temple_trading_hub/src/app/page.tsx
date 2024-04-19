@@ -86,7 +86,6 @@ function ElegantSite() {
       </Container>
 
 
-
       {/* Testimonials */}
       <Container maxWidth="md" sx={{ marginTop: 3 }}>
         <Typography variant="h4" sx={{ marginBottom: 3 }}>
