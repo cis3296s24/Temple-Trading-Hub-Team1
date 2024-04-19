@@ -25,7 +25,7 @@ export const uploadThread = async (user, description, image) => {
 
   if (image.name) {
     const storage = getStorage();
-    const imageLocation = `threadImages/${docRef.id}/${image.name}`;
+    const imageLocation = `threadImages/${docRef.id}+${image.name}`;
     const storageRef = ref(storage, imageLocation);
     await uploadBytes(storageRef, image);
     link = await getDownloadURL(storageRef);

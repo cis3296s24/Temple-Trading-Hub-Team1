@@ -34,7 +34,6 @@ const ProductPage = ({ params }: any) => {
 
     fetchProduct();
   }, []);
-  const router = useRouter();
   const routeToEdit = (product: any) => {
     router.push('/trading/edit');
   };

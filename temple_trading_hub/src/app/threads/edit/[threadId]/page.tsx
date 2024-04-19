@@ -17,25 +17,32 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { UserAuth } from '@context/AuthContext';
 import { useRouter } from 'next/navigation';
-import { uploadThread } from './uploadThread';
+import { updateThread, deleteThread } from './modifyThread';
 import { db } from '@firebase';
 import { doc, getDoc } from 'firebase/firestore';
-
-const createTradeSchema = yup.object({
-  description: yup.string().required('Please enter a description'),
-});
 
 const createThread = ({ params }) => {
   const { user } = UserAuth();
   const [itemimage, setItemImage] = useState('');
   const [description, setDescription] = useState('');
   const [imageupload, setImageUpload] = useState('');
+  const [thread, setThread] = useState('');
   const { threadId }: any = params;
 
   const router = useRouter();
 
-  const handleUploadTrade = async (e: any) => {
-    await uploadThread(user, e.description, imageupload)
+  const handleUploadThread = async (e: any) => {
+    await updateThread(e.description, imageupload, threadId)
+      //@ts-ignore
+      .then(router.push('/threads'));
+  };
+
+  const handleDeleteThread = async (e: any) => {
+    await deleteThread(
+      user.uid,
+      threadId,
+      thread.images && `${threadId}+${thread.images}`
+    )
       //@ts-ignore
       .then(router.push('/threads'));
   };
@@ -48,10 +55,9 @@ const createThread = ({ params }) => {
 
         if (docSnap.exists()) {
           const data = docSnap.data();
-          if (data) {
-            setItemImage(data.imageUrl);
-            setDescription(data.description);
-          }
+          setItemImage(data.imageUrl);
+          setDescription(data.description);
+          setThread(data);
         } else {
           router.push('/threads');
         }
@@ -74,9 +80,8 @@ const createThread = ({ params }) => {
     initialValues: {
       description: description,
     },
-    validationSchema: createTradeSchema,
     onSubmit: (values: any) => {
-      handleUploadTrade(values);
+      handleUploadThread(values);
     },
   });
 
@@ -91,8 +96,16 @@ const createThread = ({ params }) => {
         justifyContent: 'center',
         alignContent: 'center',
       }}>
-      <Typography component='h1' variant='h5' sx={{ mb: 1.5 }} align='center'>
+      <Typography component='h1' variant='h5' sx={{ mb: 1.5 }}>
         Create a thread
+        <Button
+          className={'submitButton'}
+          sx={{ float: 'right', marginBottom: 1 }}
+          type='submit'
+          variant='contained'
+          onClick={handleDeleteThread}>
+          Delete Thread
+        </Button>
       </Typography>
       <form onSubmit={formik.handleSubmit}>
         <TextField
@@ -102,7 +115,7 @@ const createThread = ({ params }) => {
           minRows={4}
           size='small'
           variant='outlined'
-          value={description}
+          defaultValue={description}
           className={'outlinedTextField'}
           style={{ marginBottom: '1em' }}
           id='description'
@@ -166,7 +179,7 @@ const createThread = ({ params }) => {
           sx={{ float: 'right' }}
           type='submit'
           variant='contained'>
-          Create Thread
+          Edit Thread
         </Button>
       </form>
     </Container>
