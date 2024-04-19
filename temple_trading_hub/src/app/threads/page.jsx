@@ -19,6 +19,7 @@ import Link from 'next/link';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@firebase';
 
+
 const Threads = () => {
   const [threads, setThreads] = useState([]);
   const [cols, setCols] = useState(3);
@@ -56,7 +57,7 @@ const Threads = () => {
             threads.map((doc) => {
               return (
                 <ImageListItem key={doc.uid}>
-                  <ThreadsCard doc={doc} />
+                  <ThreadsCard doc={doc} edit={user && user.email == doc.userEmail ? true : false} />
                 </ImageListItem>
               );
             })

@@ -6,7 +6,7 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Button, Container} from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { UserAuth } from '@context/AuthContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -15,6 +15,7 @@ const ProductPage = ({ params }: any) => {
   const { user } = UserAuth();
   const [product, setProduct] = useState();
   const { productId }: any = params;
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -26,17 +27,16 @@ const ProductPage = ({ params }: any) => {
           setProduct(docSnap.data());
         } else {
           console.log('Product not found');
+          router.push('/trading');
         }
       }
     };
 
     fetchProduct();
   }, []);
-  const router = useRouter();
   const routeToEdit = (product: any) => {
-    
-    router.push("/trading/edit");
-  }
+    router.push('/trading/edit');
+  };
 
   return (
     <Container maxWidth='lg' sx={{ padding: '30px' }}>
@@ -75,29 +75,34 @@ const ProductPage = ({ params }: any) => {
       </Card> */}
       <Card>
         {product && //@ts-ignore
-        product.imageUrl && (
-          <CardMedia
-            component='img'
-            image={product && //@ts-ignore
-              product.imageUrl}
-            alt={product && //@ts-ignore
-            product.image}
-          />
-        )}
+          product.imageUrl && (
+            <CardMedia
+              component='img'
+              image={
+                product && //@ts-ignore
+                product.imageUrl
+              }
+              alt={
+                product && //@ts-ignore
+                product.image
+              }
+            />
+          )}
         <CardContent>
           <Typography variant='h2' color='text.secondary'>
             {product && //@ts-ignore
-            product.title}
+              product.title}
           </Typography>
           <Typography variant='h6' color='text.secondary'>
-            Description: {product && 
-            //@ts-ignore 
-            product.description}
+            Description:{' '}
+            {product &&
+              //@ts-ignore
+              product.description}
           </Typography>
           <Typography variant='h6' color='text.secondary'>
-            
-            Price: {product && //@ts-ignore 
-            product.price}
+            Price:{' '}
+            {product && //@ts-ignore
+              product.price}
           </Typography>
           <Button
             sx={{ marginTop: 2 }}
@@ -109,16 +114,15 @@ const ProductPage = ({ params }: any) => {
             Contact User
           </Button>
           {/* @ts-ignore */}
-          {user && product && (user.uid === product.userID) ? (
-          <Link
-          href={{
-            pathname: '../trading/edit/',
-            query: {id: productId}
-          }}
-        >
-          Edit Trade
-        </Link>
-        ): null}
+          {user && product && user.uid === product.userID ? (
+            <Link
+              href={{
+                pathname: '../trading/edit/',
+                query: { id: productId },
+              }}>
+              Edit Trade
+            </Link>
+          ) : null}
         </CardContent>
       </Card>
     </Container>

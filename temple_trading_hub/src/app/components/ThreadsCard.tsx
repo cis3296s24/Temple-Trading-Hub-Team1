@@ -6,9 +6,11 @@ import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
-import { alpha } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import { IconButton, alpha } from '@mui/material';
+import Link from 'next/link';
 
-export default function ThreadsCard({ doc }: any) {
+export default function ThreadsCard({ doc, edit }: any) {
   return (
     <Card
       variant='outlined'
@@ -25,6 +27,15 @@ export default function ThreadsCard({ doc }: any) {
           <Avatar sx={{ bgcolor: '#A31F37', color: 'white' }} aria-label='user'>
             {doc.userEmail[0]}
           </Avatar>
+        }
+        action={
+          edit && (
+            <IconButton aria-label='edit'>
+              <Link href={`/threads/edit/${doc.uid}`}>
+                <EditIcon />
+              </Link>
+            </IconButton>
+          )
         }
         title={doc.userEmail}
       />
