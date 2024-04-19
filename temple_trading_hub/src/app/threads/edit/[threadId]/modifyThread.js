@@ -22,14 +22,14 @@ export const updateThread = async (description, image, threadId) => {
   if (docData.data().images) {
     const listingFile = ref(
       storage,
-      `threadImages/${docRef.id}+${docData.data().image}`
+      `threadImages/${docRef.id}+${docData.data().images}`
     );
     await deleteObject(listingFile);
   }
 
   const updatedDoc = await updateDoc(docRef, {
     description: description ? description : docData.data().description,
-    image: image && image.name ? image.name : docData.data().images,
+    images: image && image.name ? image.name : docData.data().images,
   }).catch((error) => {
     console.log('Update thread Error');
     return new Response('update listing error', {
