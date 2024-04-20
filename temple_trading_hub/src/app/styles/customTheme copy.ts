@@ -8,7 +8,7 @@ import { brand } from '../theme'; // Replace './originalThemeFile' with the corr
 const customButtonStyle = {
     // Define your custom button styles here
     root: {
-      color: 'black',
+      color: 'white',
       transition: '0.2s ease-out',
       '&:hover': {
         color: '#A31F37',

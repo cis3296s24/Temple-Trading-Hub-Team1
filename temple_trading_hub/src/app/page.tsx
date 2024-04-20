@@ -6,7 +6,9 @@ const SplashPage = () => {
     <div className="splash-page">
       <div className="splash-content">
         {/* Add your content here */}
-        <h1>Welcome to The Temple Trading Hub</h1>
+        <h2>Welcome to</h2>
+        
+        <h1>The Temple Trading Hub</h1>
         <p>Buy it. Sell it. Love it.</p>
       </div>
     </div>
