@@ -1,7 +1,4 @@
-
-'use client';
 import * as React from 'react';
-import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -15,47 +12,36 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { UserAuth } from '@context/AuthContext';
-import { useRouter } from 'next/navigation';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
 
-const SignInSchema = yup.object().shape({
-  email: yup
-    .string()
-    .required('Provide @temple.edu Email')
-    .email('Invalid email format')
-    .min(13, 'Email is too short')
-    .max(60, 'Email is too long'),
-  password: yup.string().required('Please enter your password'),
-});
+function Copyright(props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
-const SignInSide = () => {
-  const router = useRouter();
-  const { user, signIn } = UserAuth();
+// TODO remove, this demo shouldn't need to reset the theme.
 
-  const [error, setError] = useState('');
+const defaultTheme = createTheme();
 
-  const handleSignIn = async (values: { email: any; password: any; }) => {
-    try {
-      await signIn(values.email, values.password);
-      router.push('/');
-    } catch (error: any) {
-      setError(error.message);
-    }
+export default function SignInSide() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
   };
 
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validationSchema: SignInSchema,
-    onSubmit: handleSignIn,
-  });
-
   return (
-    <ThemeProvider theme={createTheme()}>
+    <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -88,7 +74,7 @@ const SignInSide = () => {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -98,10 +84,6 @@ const SignInSide = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
               />
               <TextField
                 margin="normal"
@@ -112,20 +94,11 @@ const SignInSide = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                error={formik.touched.password && Boolean(formik.errors.password)}
-                helperText={formik.touched.password && formik.errors.password}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
-              {error && (
-                <Typography variant="body2" color="error" align="center" gutterBottom>
-                  {error}
-                </Typography>
-              )}
               <Button
                 type="submit"
                 fullWidth
@@ -134,24 +107,23 @@ const SignInSide = () => {
               >
                 Sign In
               </Button>
-              <Grid container justifyContent="space-between">
-                <Grid item>
+              <Grid container>
+                <Grid item xs>
                   <Link href="#" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/auth/signup" variant="body2">
-                    Don't have an account? Sign Up
+                  <Link href="#" variant="body2">
+                    {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
               </Grid>
+              <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
         </Grid>
       </Grid>
     </ThemeProvider>
   );
-};
-
-export default SignInSide;
+}
