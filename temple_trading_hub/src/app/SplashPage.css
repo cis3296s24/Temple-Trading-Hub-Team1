@@ -1,0 +1,34 @@
+.splash-page
+{
+    background-image: url('./images/girlanddog.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    /* Set the height to fill the entire viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* opacity: 0.8; */
+    /* Adjust the opacity to make the image a little faded */
+}
+
+.splash-content
+{
+    text-align: center;
+    color: white;
+    /* Set text color to white for contrast */
+}
+
+.splash-content h1
+{
+    font-size: 5rem;
+    /* Increase font size for the heading */
+    font-weight: bold;
+    /* Make the heading bold */
+}
+
+.splash-content p
+{
+    font-size: 2rem;
+    /* Increase font size for the paragraph */
+}
