@@ -37,11 +37,10 @@ const SignInSide = () => {
 
   const handleSignIn = async (values) => {
     try {
-      console.log('Attempting to sign in with:', values.email, values.password);
+      console.log('Attempting to sign in with:', values.email, values.password);  // Log values
       await signIn(values.email, values.password);
     } catch (error) {
-      // Set error state if authentication fails
-      setError('Password incorrect. Please try again.');
+      // Log the error or show an error message
       console.error("Authentication failed", error);
     }
   };
@@ -99,11 +98,6 @@ const SignInSide = () => {
               />
             </Grid>
           </Grid>
-          {error && ( // Display error message if error exists
-            <Typography variant='body2' color='error' align='center' sx={{ mt: 2 }}>
-              {error}
-            </Typography>
-          )}
           <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
             Sign In
           </Button>
