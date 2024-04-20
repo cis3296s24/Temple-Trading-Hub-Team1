@@ -1,0 +1,40 @@
+'use client';
+
+// SignUpPage.tsx
+import { UserAuth } from '@context/AuthContext';
+import { useRouter } from 'next/router'; // Import useRouter from next/router
+import { useState, useEffect } from 'react';
+import SignUp from './SignUp'; // Import SignUp component
+
+const SignUpPage: React.FC = () => {
+    const router = useRouter(); // Initialize useRouter
+    const { user } = UserAuth();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSignUp = async () => {
+        // Implement your sign-up logic here
+        console.log('Signing up with:', email, password);
+    };
+
+    useEffect(() => {
+        const checkAuthentication = () => {
+            if (user) {
+                router.push('/'); // Redirect to home page if user is authenticated
+            }
+        };
+        checkAuthentication();
+    }, [user, router]);
+
+    return (
+        <SignUp
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            handleSignUp={handleSignUp}
+        />
+    );
+};
+
+export default SignUpPage;

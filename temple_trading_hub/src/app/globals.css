@@ -86,8 +86,8 @@ body {
 }
 
 body {
-  background: rgb(17,0,0);
-  background: linear-gradient(0deg, rgba(17,0,0,1) 92%, rgba(51,0,0,1) 100%);
+  background: rgb(255, 255, 255);
+  /* background: linear-gradient(0deg, rgba(17,0,0,1) 92%, rgba(51,0,0,1) 100%); */
   margin: 0;
   padding: 0;
   min-height: 100vh;
