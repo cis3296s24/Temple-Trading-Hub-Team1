@@ -24,6 +24,7 @@ const trading = () => {
   const screenSize = useScreenSize();
   const [selectedCategory, setSelectedCategory] = useState('all');
 
+  const [alignment, setAlignment] = React.useState('left');
   const handleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: string) => {
     setSelectedCategory(newAlignment);
   };
@@ -38,9 +39,15 @@ const trading = () => {
     }
   }, [screenSize.width, user]);
 
+  const control = {
+    value: alignment,
+    onChange: handleChange,
+    exclusive: true,
+  };
+
   return (
-    <Container maxWidth='lg' sx={{ padding: '30px', mt: 1 }}>
-      <ToggleButtonGroup
+    <Container maxWidth='sm' sx={{ padding: '30px', mt: 1 }}>
+      <ToggleButtonGroup size="small"
       color="primary"
       value={selectedCategory}
       exclusive
@@ -53,7 +60,7 @@ const trading = () => {
         <ToggleButton value="Apparel">Apparel</ToggleButton>
         <ToggleButton value="tools">Tools</ToggleButton>
         <ToggleButton value="instruments">Instruments</ToggleButton>
-        <ToggleButton value="misc">Miscelleneous</ToggleButton>
+        <ToggleButton value="misc">Misc</ToggleButton>
       </ToggleButtonGroup>
       <br/>
       <br/>

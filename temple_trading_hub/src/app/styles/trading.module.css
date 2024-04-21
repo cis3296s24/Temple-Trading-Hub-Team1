@@ -13,13 +13,13 @@
     margin-left: -5%;
     font-family: 'inter', sans-serif;
     gap: 10px;
-    font-size: large;
+    font-size: small;
     transform: scale(1.2);
   }
 
   .trading_content {
     display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Three columns */
+  grid-template-columns: repeat(5, 1fr); /* Three columns */
   grid-template-rows: repeat(5, auto); /* Two rows */
   gap: 80px; /* Padding between rows and columns */
   padding: 80px; /* Padding for the container */
