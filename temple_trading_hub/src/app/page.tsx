@@ -1,3 +1,4 @@
+'use client'
 //import Image from "next/image";
 import './styles/global.css';
 import './styles/About.css';
@@ -11,8 +12,12 @@ import airpods from './Images/airpods.webp';
 // import img5 from './Images/used_iphone_xr.webp';
 import brad from './images/brad.webp';
 import angelina from './images/angelina.webp';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, CssBaseline, Box, Avatar, Stack, Button, Typography } from '@mui/material';
+import Link from 'next/link';
+import { db } from '@firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import { onSnapshot } from 'firebase/firestore';
 
 
 const Vans = vans.src;
@@ -31,61 +36,124 @@ const Angelina = angelina.src;
 // Example hero image - replace with your specific image
 import heroImage from './Images/splashgraphic.jpg';
 
+interface Product {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  createdAt: Date; 
+ }
 
 function ElegantSite() {
+  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchFeaturedProducts = async () => {
+      try {
+        const productsRef = collection(db, 'listings');
+        const snapshot = await getDocs(productsRef);
+        const products: Product[] = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setFeaturedProducts(products);
+      } catch (error) {
+        console.error('Error fetching featured products:', error);
+      }
+    };
+
+ 
+    fetchFeaturedProducts();
+
+    // Set up listener for changes in the 'listings' collection
+    const unsubscribe = onSnapshot(collection(db, 'listings'), (snapshot) => {
+      const updatedProducts: Product[] = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setFeaturedProducts(updatedProducts);
+    });
+
+    // Clean up listener
+    return () => unsubscribe();
+  }, []);
+
+  const addNewItem = async () => {
+    try {
+       await addDoc(collection(db, 'listings'), {
+         title: 'New Item',
+         description: 'Description of new item',
+         price: 0,
+         imageUrl: 'URL_of_new_item_image',
+         createdAt: new Date(), // Ensure this field is included
+       });
+       console.log('New item added successfully!');
+    } catch (error) {
+       console.error('Error adding new item:', error);
+    }
+   };
+
   return (
     <React.Fragment>
       <CssBaseline />
       {/* Hero Section */}
       <Container maxWidth="md" sx={{
-        height: '30vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundImage: `url(${heroImage.src})`,
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        color: '#333', // Updated color to match site's theme
-        textAlign: 'center',
-        padding: 4,
-        borderRadius: '40px',
-        marginBottom: '20px',
-        marginTop: '60px'
+          height: '30vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundImage: `url(${heroImage.src})`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          color: '#333',
+          textAlign: 'center',
+          padding: 4,
+          borderRadius: '40px',
+          marginBottom: '45px',
+          marginTop: '60px',
       }}>
-    
-
-      </Container>
+      <img src={heroImage.src} alt="Hero Image" style={{
+          width: '55%',
+          height: 'auto',
+          borderRadius: '40px',
+          boxShadow: '0px 0px 15px 5px rgba(255, 0, 0, 0.7)' // Red glow effect
+      }} />
+  
+  </Container>
 
       {/* Product Showcase */}
-      <Container maxWidth="md">
+      <Container maxWidth="md" sx={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
         <Typography variant="h4" sx={{ marginBottom: 3 }}>
           Featured Products
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3, marginTop: 3 }}>
-          <Box sx={{ textAlign: 'center' }}>
-            <Avatar alt="Worn Vans" src={Vans} sx={{ width: 150, height: 150, marginBottom: 1 }} />
-            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Worn Vans</Typography>
-            <Typography variant="body2">$49.99</Typography>
-          </Box>
-          <Box sx={{ textAlign: 'center' }}>
-            <Avatar alt="Guitar" src={Guitar} sx={{ width: 150, height: 150, marginBottom: 1 }} />
-            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Acoustic Guitar</Typography>
-            <Typography variant="body2">$199.99</Typography>
-          </Box>
-          <Box sx={{ textAlign: 'center' }}>
-            <Avatar alt="Airpods" src={Airpods} sx={{ width: 150, height: 150, marginBottom: 1 }} />
-            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>Apple Airpods</Typography>
-            <Typography variant="body2">$159.99</Typography>
-          </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-start', marginBottom: 3, marginTop: 3, whiteSpace: 'nowrap' }}>
+          {featuredProducts.slice(0, 5).map(product => (
+            <Box key={product.id} sx={{ textAlign: 'center', margin: '20px', display: 'inline-block' }}>
+              <Link href={`/trading/${product.id}`} passHref>
+                <Box sx={{ display: 'inline-block', textDecoration: 'none', color: 'inherit', position: 'relative' }}>
+                 <Avatar
+                   alt={product.title}
+                   src={product.imageUrl}
+                   sx={{
+                     width: 200,
+                     height: 200,
+                     marginBottom: 1,
+                     borderRadius: '50%', 
+                     boxShadow: '0 0 10px 3px rgba(255, 0, 0, 0.5)', 
+                   }}
+                 />
+                 <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{product.title}</Typography>
+                 <Typography variant="body2">${product.price}</Typography>
+                </Box>
+              </Link>
+            </Box>
+          ))}
         </Box>
-        {/* <Button variant="outlined" color="primary" size="large">
-          View More Products
-        </Button> */}
       </Container>
-
-
+      
       {/* Testimonials */}
       <Container maxWidth="md" sx={{ marginTop: 3 }}>
         <Typography variant="h4" sx={{ marginBottom: 3 }}>
