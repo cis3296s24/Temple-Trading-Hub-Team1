@@ -39,6 +39,7 @@ export const updateTrade = async (
     category: category ? category : docData.data().category,
     images: image.name ? [`${docRef.id}+${image.name}`] : 'no-image',
     location: location ? location : docData.data().location,
+    
   }).catch((error) => {
     console.log('Update lisitng Error');
     return new Response('update listing error', {
