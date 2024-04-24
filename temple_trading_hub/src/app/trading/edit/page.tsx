@@ -20,7 +20,6 @@ const createTradeSchema = yup.object({
     description: yup.string(),
     price: yup.string(),
     category: yup.string(),
-    location: yup.string()
   });
 
 const editTrade = () => {
@@ -31,11 +30,6 @@ const editTrade = () => {
     const [itemimage, setItemImage] = useState(searchParams.get('imageurl'));
     const [imageupload, setImageUpload] = useState('');
     const [category, setCategory] = useState("Category");
-    const [location, setLocation] = useState('Location');
-
-    const handleLocationChange = (event: SelectChangeEvent) => {
-      setLocation(event.target.value);
-    }
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -74,7 +68,6 @@ const editTrade = () => {
           e.description,
           e.price,
           e.category == 'Category' ? '' : e.category,
-          e.location == 'Location' ? '' : e.location,
           imageupload,
           searchParams.get("id")
         )
@@ -92,8 +85,6 @@ const editTrade = () => {
           price: product.price,
           //@ts-ignore
           category: product.category,
-          //@ts-ignore
-          location: product.location,
         },
         validationSchema: createTradeSchema,
         onSubmit: (values: any) => {
@@ -124,6 +115,10 @@ const editTrade = () => {
           </Typography>
         </Grid>
         <Grid item>
+        <Button
+        variant="contained"
+        sx={{ float: 'right', marginBottom: 1 }}
+        onClick={handleDelete}>Delete Trade</Button>
           <form onSubmit={formik.handleSubmit}>
             <TextField
               fullWidth
@@ -216,34 +211,6 @@ const editTrade = () => {
                 <MenuItem value={'misc'}>Miscellaneous</MenuItem>
               </Select>
             </FormControl>
-
-            <FormControl
-              sx={{
-                width: '100%',
-                marginBottom: '1em',
-                marginRight: '1em',
-                borderRadius: '10px',
-              }}
-              variant='outlined'>
-              <Select
-                aria-label='Location'
-                placeholder='Location'
-                value={location}
-                onChange={(e) => {
-                  handleLocationChange(e);
-                  formik.handleChange(e);
-                }}
-                id='location'
-                name='location'>
-                <MenuItem value={'Location'}>Location</MenuItem>
-                <MenuItem value={'Bell Tower'}>Bell Tower</MenuItem>
-                <MenuItem value={'Skate Park'}>Skate Park</MenuItem>
-                <MenuItem value={'Charles Library'}>Charles Library</MenuItem>
-                <MenuItem value={'Ambler Campus'}>Ambler Campus</MenuItem>
-                <MenuItem value={'Center City Campus'}>Center City Campus</MenuItem>
-              </Select>
-              </FormControl>
-              
             <Grid>
               {!itemimage ? (
                 <Grid
@@ -308,11 +275,6 @@ const editTrade = () => {
             </Button>
           </form>
         </Grid>
-        <Button
-        variant="contained"
-        fullWidth
-        style={{ marginBottom: '150px' }}
-        onClick={handleDelete}>Delete Trade</Button>
       </Grid>
     </Container>
   );
