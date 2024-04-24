@@ -108,6 +108,11 @@ const ProductPage = ({ params }: any) => {
             Price: {product && //@ts-ignore 
             product.price}
           </Typography>
+          <Typography variant='h4' color='text.secondary'>
+            
+            Location: {product && //@ts-ignore 
+            product.location}
+          </Typography>
           <Button
             sx={{ marginTop: 2, 
               fontSize: '2rem', // Increase font size

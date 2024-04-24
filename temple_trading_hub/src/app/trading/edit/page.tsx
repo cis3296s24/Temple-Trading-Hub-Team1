@@ -20,6 +20,7 @@ const createTradeSchema = yup.object({
     description: yup.string(),
     price: yup.string(),
     category: yup.string(),
+    location: yup.string()
   });
 
 const editTrade = () => {
@@ -30,6 +31,11 @@ const editTrade = () => {
     const [itemimage, setItemImage] = useState(searchParams.get('imageurl'));
     const [imageupload, setImageUpload] = useState('');
     const [category, setCategory] = useState("Category");
+    const [location, setLocation] = useState('Location');
+
+    const handleLocationChange = (event: SelectChangeEvent) => {
+      setLocation(event.target.value);
+    }
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -68,6 +74,7 @@ const editTrade = () => {
           e.description,
           e.price,
           e.category == 'Category' ? '' : e.category,
+          e.location == 'Location' ? '' : e.location,
           imageupload,
           searchParams.get("id")
         )
@@ -85,6 +92,8 @@ const editTrade = () => {
           price: product.price,
           //@ts-ignore
           category: product.category,
+          //@ts-ignore
+          location: product.location,
         },
         validationSchema: createTradeSchema,
         onSubmit: (values: any) => {
@@ -205,6 +214,25 @@ const editTrade = () => {
                 <MenuItem value={'tools'}>Tools</MenuItem>
                 <MenuItem value={'instruments'}>Instruments</MenuItem>
                 <MenuItem value={'misc'}>Miscellaneous</MenuItem>
+              </Select>
+              <Select
+                aria-label='Location'
+                placeholder='Location'
+                value={location}
+                onChange={(e) => {
+                    //@ts-ignore
+                  handleLocationChange(e);
+                  formik.handleChange(e);
+                }}
+                id='location'
+                name='location'
+                //@ts-ignore
+                defaultValue={product.location}>
+                <MenuItem value={'Bell Tower'}>Bell Tower</MenuItem>
+                <MenuItem value={'Skate Park'}>Skate Park</MenuItem>
+                <MenuItem value={'Charles Library'}>Charles Library</MenuItem>
+                <MenuItem value={'Ambler Campus'}>Ambler Campus</MenuItem>
+                <MenuItem value={'Center City Campus'}>Center City Campus</MenuItem>
               </Select>
             </FormControl>
             <Grid>
