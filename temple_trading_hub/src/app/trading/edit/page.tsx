@@ -20,6 +20,7 @@ const createTradeSchema = yup.object({
     description: yup.string(),
     price: yup.string(),
     category: yup.string(),
+    location: yup.string()
   });
 
 const editTrade = () => {
@@ -68,6 +69,7 @@ const editTrade = () => {
           e.description,
           e.price,
           e.category == 'Category' ? '' : e.category,
+          e.location == 'Location' ? '' : e.location,
           imageupload,
           searchParams.get("id")
         )
@@ -85,6 +87,8 @@ const editTrade = () => {
           price: product.price,
           //@ts-ignore
           category: product.category,
+          //@ts-ignore
+          location: product.location,
         },
         validationSchema: createTradeSchema,
         onSubmit: (values: any) => {
@@ -205,6 +209,25 @@ const editTrade = () => {
                 <MenuItem value={'tools'}>Tools</MenuItem>
                 <MenuItem value={'instruments'}>Instruments</MenuItem>
                 <MenuItem value={'misc'}>Miscellaneous</MenuItem>
+              </Select>
+              <Select
+                aria-label='Location'
+                placeholder='Location'
+                value={location}
+                onChange={(e) => {
+                    //@ts-ignore
+                  handleChange(e);
+                  formik.handleChange(e);
+                }}
+                id='location'
+                name='location'
+                //@ts-ignore
+                defaultValue={product.location}>
+                <MenuItem value={'Category'}>Bell Tower</MenuItem>
+                <MenuItem value={'electronics'}>Skate Park</MenuItem>
+                <MenuItem value={'Apparel'}>Charles Library</MenuItem>
+                <MenuItem value={'tools'}>Ambler Campus</MenuItem>
+                <MenuItem value={'instruments'}>Center City Campus</MenuItem>
               </Select>
             </FormControl>
             <Grid>
