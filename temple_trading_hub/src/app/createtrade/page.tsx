@@ -30,7 +30,7 @@ const createTradeSchema = yup.object({
   description: yup.string().required('Please enter a description'),
   price: yup.string().required('Please enter a price'),
   category: yup.string().required('Please select a category'),
-  location: yup.string().required("Please select a Location"),
+  location: yup.string(),
 });
 
 const createTrade = () => {
@@ -193,16 +193,17 @@ const createTrade = () => {
                 <MenuItem value={'instruments'}>Instruments</MenuItem>
                 <MenuItem value={'misc'}>Miscellaneous</MenuItem>
               </Select>
+
               <Select
                 aria-label='Location'
-                placeholder='Locat ion'
+                placeholder='Location'
                 value={location}
                 onChange={(e) => {
                   handleLocationChange(e);
                   formik.handleChange(e);
                 }}
-                id='category'
-                name='category'>
+                id='location'
+                name='location'>
                 <MenuItem value={'Bell Tower'}>Bell Tower</MenuItem>
                 <MenuItem value={'Skate Park'}>Skate Park</MenuItem>
                 <MenuItem value={'Charles Library'}>Charles Library</MenuItem>
@@ -254,10 +255,10 @@ const createTrade = () => {
                 }}
               />
             </Button>
-
             <Button sx={{ float: 'right' }} type='submit' variant='contained'>
               Submit Item
             </Button>
+
           </form>
         </Grid>
       </Grid>
