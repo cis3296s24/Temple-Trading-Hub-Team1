@@ -215,26 +215,35 @@ const editTrade = () => {
                 <MenuItem value={'instruments'}>Instruments</MenuItem>
                 <MenuItem value={'misc'}>Miscellaneous</MenuItem>
               </Select>
+            </FormControl>
+
+            <FormControl
+              sx={{
+                width: '100%',
+                marginBottom: '1em',
+                marginRight: '1em',
+                borderRadius: '10px',
+              }}
+              variant='outlined'>
               <Select
                 aria-label='Location'
                 placeholder='Location'
                 value={location}
                 onChange={(e) => {
-                    //@ts-ignore
                   handleLocationChange(e);
                   formik.handleChange(e);
                 }}
                 id='location'
-                name='location'
-                //@ts-ignore
-                defaultValue={product.location}>
+                name='location'>
+                <MenuItem value={'Location'}>Location</MenuItem>
                 <MenuItem value={'Bell Tower'}>Bell Tower</MenuItem>
                 <MenuItem value={'Skate Park'}>Skate Park</MenuItem>
                 <MenuItem value={'Charles Library'}>Charles Library</MenuItem>
                 <MenuItem value={'Ambler Campus'}>Ambler Campus</MenuItem>
                 <MenuItem value={'Center City Campus'}>Center City Campus</MenuItem>
               </Select>
-            </FormControl>
+              </FormControl>
+              
             <Grid>
               {!itemimage ? (
                 <Grid

@@ -30,7 +30,7 @@ const createTradeSchema = yup.object({
   description: yup.string().required('Please enter a description'),
   price: yup.string().required('Please enter a price'),
   category: yup.string().required('Please select a category'),
-  location: yup.string(),
+  location: yup.string().required('please add a Location'),
 });
 
 const createTrade = () => {
@@ -176,6 +176,7 @@ const createTrade = () => {
                 borderRadius: '10px',
               }}
               variant='outlined'>
+
               <Select
                 aria-label='Category'
                 placeholder='Category'
@@ -193,7 +194,16 @@ const createTrade = () => {
                 <MenuItem value={'instruments'}>Instruments</MenuItem>
                 <MenuItem value={'misc'}>Miscellaneous</MenuItem>
               </Select>
+              </FormControl>
 
+              <FormControl
+              sx={{
+                width: '100%',
+                marginBottom: '1em',
+                marginRight: '1em',
+                borderRadius: '10px',
+              }}
+              variant='outlined'>
               <Select
                 aria-label='Location'
                 placeholder='Location'
@@ -204,6 +214,7 @@ const createTrade = () => {
                 }}
                 id='location'
                 name='location'>
+                <MenuItem value={'Location'}>Location</MenuItem>
                 <MenuItem value={'Bell Tower'}>Bell Tower</MenuItem>
                 <MenuItem value={'Skate Park'}>Skate Park</MenuItem>
                 <MenuItem value={'Charles Library'}>Charles Library</MenuItem>
