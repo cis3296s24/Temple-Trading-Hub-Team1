@@ -7,7 +7,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
 
-export const uploadTrade = async (user, itemname, description, price, category, image) => {
+export const uploadTrade = async (user, itemname, description, price, category, location, image) => {
 
     const docRef = await addDoc(collection(db, "listings"),  {
         userID: user.uid,
@@ -16,6 +16,7 @@ export const uploadTrade = async (user, itemname, description, price, category, 
         description: description,
         price: price,
         category: category,
+        location: location,
     }).catch((error) => {
         console.log("adding listing error");
         return new Response("adding listing error", {

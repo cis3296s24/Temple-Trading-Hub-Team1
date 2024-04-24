@@ -31,6 +31,11 @@ const editTrade = () => {
     const [itemimage, setItemImage] = useState(searchParams.get('imageurl'));
     const [imageupload, setImageUpload] = useState('');
     const [category, setCategory] = useState("Category");
+    const [location, setLocation] = useState('Location');
+
+    const handleLocationChange = (event: SelectChangeEvent) => {
+      setLocation(event.target.value);
+    }
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -216,18 +221,18 @@ const editTrade = () => {
                 value={location}
                 onChange={(e) => {
                     //@ts-ignore
-                  handleChange(e);
+                  handleLocationChange(e);
                   formik.handleChange(e);
                 }}
                 id='location'
                 name='location'
                 //@ts-ignore
                 defaultValue={product.location}>
-                <MenuItem value={'Category'}>Bell Tower</MenuItem>
-                <MenuItem value={'electronics'}>Skate Park</MenuItem>
-                <MenuItem value={'Apparel'}>Charles Library</MenuItem>
-                <MenuItem value={'tools'}>Ambler Campus</MenuItem>
-                <MenuItem value={'instruments'}>Center City Campus</MenuItem>
+                <MenuItem value={'Bell Tower'}>Bell Tower</MenuItem>
+                <MenuItem value={'Skate Park'}>Skate Park</MenuItem>
+                <MenuItem value={'Charles Library'}>Charles Library</MenuItem>
+                <MenuItem value={'Ambler Campus'}>Ambler Campus</MenuItem>
+                <MenuItem value={'Center City Campus'}>Center City Campus</MenuItem>
               </Select>
             </FormControl>
             <Grid>
