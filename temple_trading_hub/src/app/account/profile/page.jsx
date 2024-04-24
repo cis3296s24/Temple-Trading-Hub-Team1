@@ -2,7 +2,7 @@
 import '../../Styles/global.css';
 import styles from '../../styles/profile.module.css';
 import React from "react";
-import { Avatar, IconButton, Tooltip, Box, Radio, RadioGroup, FormControlLabel, Typography, Container, ImageListItem, } from '@mui/material';
+import { Avatar, Box, Radio, RadioGroup, FormControlLabel, Typography, Container, ImageListItem, } from '@mui/material';
 import { UserAuth } from '@context/AuthContext';
 import { useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';

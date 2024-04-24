@@ -23,7 +23,7 @@ export const updateTrade = async (
 
   // delete old image
   const storage = getStorage();
-  if (docData.data().images !== 'no-image') {
+  if (docData.data().images !== 'no-image' || docData.data() !== image.name) {
     const listingFile = ref(
       storage,
       `listingImages/${docData.data().images[0]}`
