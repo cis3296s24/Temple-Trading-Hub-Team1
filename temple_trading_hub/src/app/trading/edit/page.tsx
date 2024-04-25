@@ -115,6 +115,10 @@ const editTrade = () => {
           </Typography>
         </Grid>
         <Grid item>
+        <Button
+        variant="contained"
+        sx={{ float: 'right', marginBottom: 1 }}
+        onClick={handleDelete}>Delete Trade</Button>
           <form onSubmit={formik.handleSubmit}>
             <TextField
               fullWidth
@@ -271,11 +275,6 @@ const editTrade = () => {
             </Button>
           </form>
         </Grid>
-        <Button
-        variant="contained"
-        fullWidth
-        style={{ marginBottom: '150px' }}
-        onClick={handleDelete}>Delete Trade</Button>
       </Grid>
     </Container>
   );

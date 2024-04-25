@@ -30,6 +30,7 @@ const createTradeSchema = yup.object({
   description: yup.string().required('Please enter a description'),
   price: yup.string().required('Please enter a price'),
   category: yup.string().required('Please select a category'),
+  location: yup.string().required('please add a Location'),
 });
 
 const createTrade = () => {
@@ -37,9 +38,13 @@ const createTrade = () => {
   const [itemimage, setItemImage] = useState('');
   const [imageupload, setImageUpload] = useState('');
   const [category, setCategory] = useState('Category');
+  const [location, setLocation] = useState('Location');
   const handleChange = (event: SelectChangeEvent) => {
     setCategory(event.target.value);
   };
+  const handleLocationChange = (event: SelectChangeEvent) => {
+    setLocation(event.target.value);
+  }
 
   const router = useRouter();
 
@@ -50,6 +55,7 @@ const createTrade = () => {
       e.description,
       e.price,
       e.category == 'Category' ? '' : e.category,
+      e.location == 'Location' ? '' : e.location,
       imageupload
     )
       //@ts-ignore
@@ -76,6 +82,7 @@ const createTrade = () => {
       description: '',
       price: '',
       category: '',
+      location: '',
     },
     validationSchema: createTradeSchema,
     onSubmit: (values: any) => {
@@ -160,7 +167,7 @@ const createTrade = () => {
               //@ts-ignore
               helperText={formik.touched.price && formik.errors.price}
             />
-
+      
             <FormControl
               sx={{
                 width: '100%',
@@ -169,6 +176,7 @@ const createTrade = () => {
                 borderRadius: '10px',
               }}
               variant='outlined'>
+
               <Select
                 aria-label='Category'
                 placeholder='Category'
@@ -186,7 +194,34 @@ const createTrade = () => {
                 <MenuItem value={'instruments'}>Instruments</MenuItem>
                 <MenuItem value={'misc'}>Miscellaneous</MenuItem>
               </Select>
-            </FormControl>
+              </FormControl>
+
+              <FormControl
+              sx={{
+                width: '100%',
+                marginBottom: '1em',
+                marginRight: '1em',
+                borderRadius: '10px',
+              }}
+              variant='outlined'>
+              <Select
+                aria-label='Location'
+                placeholder='Location'
+                value={location}
+                onChange={(e) => {
+                  handleLocationChange(e);
+                  formik.handleChange(e);
+                }}
+                id='location'
+                name='location'>
+                <MenuItem value={'Location'}>Location</MenuItem>
+                <MenuItem value={'Bell Tower'}>Bell Tower</MenuItem>
+                <MenuItem value={'Skate Park'}>Skate Park</MenuItem>
+                <MenuItem value={'Charles Library'}>Charles Library</MenuItem>
+                <MenuItem value={'Ambler Campus'}>Ambler Campus</MenuItem>
+                <MenuItem value={'Center City Campus'}>Center City Campus</MenuItem>
+              </Select>
+              </FormControl>
             <Grid>
               {!itemimage ? null : (
                 <Grid
@@ -231,10 +266,10 @@ const createTrade = () => {
                 }}
               />
             </Button>
-
             <Button sx={{ float: 'right' }} type='submit' variant='contained'>
               Submit Item
             </Button>
+
           </form>
         </Grid>
       </Grid>
