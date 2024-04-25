@@ -78,7 +78,7 @@ const profile = () => {
   
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', }}>
-      <Box sx={{ width: '30%', marginRight: '2rem', mt: '-10rem' }}>
+      <Box sx={{ width: '30%', marginRight: '2rem', mt: '-10rem', ml: '1rem' }}>
         <Avatar 
           sx={{ bgcolor: '#A31F37', color: 'white', mr: 1, width: 100, height: 100,  fontSize: '3rem', }}
             aria-label='user'>
@@ -91,7 +91,7 @@ const profile = () => {
           {/* Add more options as needed */}
         </RadioGroup>
       </Box>
-      <Box sx={{ width: '70%', paddingTop: '-0rem', overflowY: 'scroll', }}>
+      <Box sx={{ width: '70%', paddingTop: '-0rem', overflowY: 'scroll', mr: "1rem" }}>
         <Box sx={{ overflowY: 'auto', maxHeight: '80vh' }}>
             {selectedOption === 'basic' && (
               <div>
