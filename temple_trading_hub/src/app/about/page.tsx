@@ -4,8 +4,8 @@ import React from 'react';
 
 const About = () => {
   return (
-    <Container className='about-container' maxWidth='lg'>
-      <h1>About Temple University Trading Hub</h1>
+    <Container className='about-container' maxWidth='sm'>
+      <h2>About Temple University Trading Hub</h2>
       <p>
         Temple University Trading is a place where students are able to Buy and
         Sell their goods with each other in a safe environment. This is a website that
