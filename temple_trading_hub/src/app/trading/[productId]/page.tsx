@@ -6,7 +6,7 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Button, Container} from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { UserAuth } from '@context/AuthContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -34,9 +34,8 @@ const ProductPage = ({ params }: any) => {
   }, []);
   const router = useRouter();
   const routeToEdit = (product: any) => {
-    
-    router.push("/trading/edit");
-  }
+    router.push('/trading/edit');
+  };
 
   return (
     <Container maxWidth='sm' sx={{ padding: '30px' }}>
@@ -73,69 +72,80 @@ const ProductPage = ({ params }: any) => {
           </Typography>
         </CardContent>
       </Card> */}
-      <Card  sx={{ boxShadow: '0 0 10px 3px rgba(255, 0, 0, 0.5)', // Red glow effect
+      <Card
+        sx={{
+          boxShadow: '0 0 10px 3px rgba(255, 0, 0, 0.5)', // Red glow effect
         }}>
         {product && //@ts-ignore
-        product.imageUrl && (
-          <CardMedia
-            component='img'
-            image={product && //@ts-ignore
-              product.imageUrl}
-            alt={product && //@ts-ignore
-            product.image}
-            sx={{
-              width: '70%',
-              height: 'auto',
-              objectFit: 'contain',
-              display: 'block',
-              margin: 'auto',
-              marginTop: '25px',
+          product.imageUrl && (
+            <CardMedia
+              component='img'
+              image={
+                product && //@ts-ignore
+                product.imageUrl
+              }
+              alt={
+                product && //@ts-ignore
+                product.image
+              }
+              sx={{
+                width: '70%',
+                height: 'auto',
+                objectFit: 'contain',
+                display: 'block',
+                margin: 'auto',
+                marginTop: '25px',
               }}
-          />
-        )}
+            />
+          )}
         <CardContent>
           <Typography variant='h3' align='center' color='text.secondary'>
             {product && //@ts-ignore
-            product.title}
+              product.title}
           </Typography>
-          <Typography variant='h5' color='text.secondary'>
-            Description: {product && 
-            //@ts-ignore 
-            product.description}
+
+          <Typography variant='h4' color='text.secondary'>
+            Description:{' '}
+            {product &&
+              //@ts-ignore
+              product.description}
           </Typography>
-          <Typography variant='h5' color='text.secondary'>
-            
-            Price: {product && //@ts-ignore 
-            product.price}
+          <Typography variant='h4' color='text.secondary'>
+            Price:{' '}
+            {product && //@ts-ignore
+              product.price}
           </Typography>
-          <Typography variant='h5' color='text.secondary'>
-            
-            Location: {product && //@ts-ignore 
-            product.location}
+          <Typography variant='h4' color='text.secondary'>
+            Location:{' '}
+            {product && //@ts-ignore
+              product.location}
+
           </Typography>
-          <Button
-            sx={{ marginTop: 2, 
-              fontSize: '2rem', // Increase font size
-              padding: '12px 20px', // Increase padding for larger button
-            }}
-            color='primary'
-            variant='contained'
-            fullWidth
-            //@ts-ignore
-            href={`mailto:${product && product.userEmail}`}>
-            Contact User
-          </Button>
+          {user && (
+            <Button
+              sx={{
+                marginTop: 2,
+                fontSize: '2rem', // Increase font size
+                padding: '12px 20px', // Increase padding for larger button
+              }}
+              color='primary'
+              variant='contained'
+              fullWidth
+              //@ts-ignore
+              href={`mailto:${product && product.userEmail}`}>
+              Contact User
+            </Button>
+          )}
           {/* @ts-ignore */}
-          {user && product && (user.uid === product.userID) ? (
-          <Link
-          href={{
-            pathname: '../trading/edit/',
-            query: {id: productId}
-          }}
-        >
-          Edit Trade
-        </Link>
-        ): null}
+          {user && product && user.uid === product.userID ? (
+            <Link
+              href={{
+                pathname: '../trading/edit/',
+                query: { id: productId },
+              }}>
+              Edit Trade
+            </Link>
+          ) : null}
         </CardContent>
       </Card>
     </Container>
