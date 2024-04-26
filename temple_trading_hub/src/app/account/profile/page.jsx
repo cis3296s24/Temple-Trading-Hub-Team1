@@ -12,6 +12,7 @@ import ItemsList from '../../components/ItmesList';
 import ImageList from '@mui/material/ImageList';
 import useScreenSize from '@hooks/useScreenSize';
 import ThreadsCard from '@components/ThreadsCard';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -21,12 +22,22 @@ const profile = () => {
   const [userData, setUserData] = useState([]);
   const [selectedOption, setSelectedOption] = useState('basic'); // Default selected option
   const screenSize = useScreenSize();
+  const router = useRouter();
   const [cols, setCols] = useState(3);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
 
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      if (!user) {
+        router.push('/');
+      }
+    };
+    checkAuthentication();
+  }, [user]);
 
   useEffect(() => {
     const getData = async () => {

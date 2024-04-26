@@ -1,4 +1,4 @@
-'use client'
+'use client';
 //import Image from "next/image";
 import './styles/global.css';
 import './styles/About.css';
@@ -13,12 +13,19 @@ import airpods from './Images/airpods.webp';
 import brad from './images/brad.webp';
 import angelina from './images/angelina.webp';
 import React, { useEffect, useState } from 'react';
-import { Container, CssBaseline, Box, Avatar, Stack, Button, Typography } from '@mui/material';
+import {
+  Container,
+  CssBaseline,
+  Box,
+  Avatar,
+  Stack,
+  Button,
+  Typography,
+} from '@mui/material';
 import Link from 'next/link';
 import { db } from '@firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { onSnapshot } from 'firebase/firestore';
-
 
 const Vans = vans.src;
 const Guitar = guitar.src;
@@ -42,8 +49,8 @@ interface Product {
   description: string;
   price: number;
   imageUrl: string;
-  createdAt: Date; 
- }
+  createdAt: Date;
+}
 
 function ElegantSite() {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
@@ -63,7 +70,6 @@ function ElegantSite() {
       }
     };
 
- 
     fetchFeaturedProducts();
 
     // Set up listener for changes in the 'listings' collection
@@ -81,30 +87,31 @@ function ElegantSite() {
 
   const addNewItem = async () => {
     try {
-       await addDoc(collection(db, 'listings'), {
-         title: 'New Item',
-         description: 'Description of new item',
-         price: 0,
-         imageUrl: 'URL_of_new_item_image',
-         createdAt: new Date(), // Ensure this field is included
-       });
-       console.log('New item added successfully!');
+      await addDoc(collection(db, 'listings'), {
+        title: 'New Item',
+        description: 'Description of new item',
+        price: 0,
+        imageUrl: 'URL_of_new_item_image',
+        createdAt: new Date(), // Ensure this field is included
+      });
+      console.log('New item added successfully!');
     } catch (error) {
-       console.error('Error adding new item:', error);
+      console.error('Error adding new item:', error);
     }
-   };
+  };
 
   return (
     <React.Fragment>
       <CssBaseline />
       {/* Hero Section */}
-      <Container maxWidth="md" sx={{
+      <Container
+        maxWidth='md'
+        sx={{
           height: '30vh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundImage: `url(${heroImage.src})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
@@ -114,73 +121,112 @@ function ElegantSite() {
           borderRadius: '40px',
           marginBottom: '45px',
           marginTop: '60px',
-      }}>
-      <img src={heroImage.src} alt="Hero Image" style={{
-          width: '55%',
-          height: 'auto',
-          borderRadius: '40px',
-          boxShadow: '0px 0px 15px 5px rgba(255, 0, 0, 0.7)' // Red glow effect
-      }} />
-  
-  </Container>
+        }}>
+        <img
+          src={heroImage.src}
+          alt='Hero Image'
+          style={{
+            width: '55%',
+            height: 'auto',
+            borderRadius: '40px',
+            boxShadow: '0px 0px 15px 5px rgba(255, 0, 0, 0.7)', // Red glow effect
+          }}
+        />
+      </Container>
 
       {/* Product Showcase */}
-      <Container maxWidth="md" sx={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
-        <Typography variant="h4" sx={{ marginBottom: 3 }}>
+      <Container maxWidth='md' sx={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
+        <Typography variant='h4' sx={{ marginBottom: 3 }}>
           Featured Products
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-start', marginBottom: 3, marginTop: 3, whiteSpace: 'nowrap' }}>
-          {featuredProducts.slice(0, 5).map(product => (
-            <Box key={product.id} sx={{ textAlign: 'center', margin: '20px', display: 'inline-block' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            marginBottom: 3,
+            marginTop: 3,
+            whiteSpace: 'nowrap',
+          }}>
+          {featuredProducts.slice(0, 5).map((product) => (
+            <Box
+              key={product.id}
+              sx={{
+                textAlign: 'center',
+                margin: '20px',
+                display: 'inline-block',
+              }}>
               <Link href={`/trading/${product.id}`} passHref>
-                <Box sx={{ display: 'inline-block', textDecoration: 'none', color: 'inherit', position: 'relative' }}>
-                 <Avatar
-                   alt={product.title}
-                   src={product.imageUrl}
-                   sx={{
-                     width: 200,
-                     height: 200,
-                     marginBottom: 1,
-                     borderRadius: '50%', 
-                     boxShadow: '0 0 10px 3px rgba(255, 0, 0, 0.5)', 
-                   }}
-                 />
-                 <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{product.title}</Typography>
-                 <Typography variant="body2">${product.price}</Typography>
+                <Box
+                  sx={{
+                    display: 'inline-block',
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    position: 'relative',
+                  }}>
+                  <Avatar
+                    alt={product.title}
+                    src={product.imageUrl}
+                    sx={{
+                      width: 200,
+                      height: 200,
+                      marginBottom: 1,
+                      borderRadius: '50%',
+                      boxShadow: '0 0 10px 3px rgba(255, 0, 0, 0.5)',
+                    }}
+                  />
+                  <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
+                    {product.title}
+                  </Typography>
+                  <Typography variant='body2'>${product.price}</Typography>
                 </Box>
               </Link>
             </Box>
           ))}
         </Box>
       </Container>
-      
+
       {/* Testimonials */}
-      <Container maxWidth="md" sx={{ marginTop: 3 }}>
-        <Typography variant="h4" sx={{ marginBottom: 3 }}>
+      <Container maxWidth='md' sx={{ marginTop: 3 }}>
+        <Typography variant='h4' sx={{ marginBottom: 3 }}>
           Testimonials
         </Typography>
         {/* Testimonial 1 */}
         <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
-          <Avatar alt="Brad Pitt" src={Brad} sx={{ marginRight: 2 }} />
-          <Box sx={{ backgroundColor: '#333', padding: '20px', borderRadius: '10px', width: '100%' }}>
-            <Typography variant="body1" sx={{ fontStyle: 'italic', marginBottom: 1 }}>
+          <Avatar alt='Brad Pitt' src={Brad} sx={{ marginRight: 2 }} />
+          <Box
+            sx={{
+              backgroundColor: '#333',
+              padding: '20px',
+              borderRadius: '10px',
+              width: '100%',
+            }}>
+            <Typography
+              variant='body1'
+              sx={{ fontStyle: 'italic', marginBottom: 1 }}>
               "What a great way to trade items on-campus!"
             </Typography>
-            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+            <Typography variant='body2' sx={{ fontWeight: 'bold' }}>
               - Brad Pitt
             </Typography>
           </Box>
         </Box>
- 
-        
+
         {/* Testimonial 2 */}
         <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
-          <Avatar alt="Angelina Jolie" src={Angelina} sx={{ marginRight: 2 }} />
-          <Box sx={{ backgroundColor: '#333', padding: '20px', borderRadius: '10px', width: '100%' }}>
-            <Typography variant="body1" sx={{ fontStyle: 'italic', marginBottom: 1 }}>
+          <Avatar alt='Angelina Jolie' src={Angelina} sx={{ marginRight: 2 }} />
+          <Box
+            sx={{
+              backgroundColor: '#333',
+              padding: '20px',
+              borderRadius: '10px',
+              width: '100%',
+            }}>
+            <Typography
+              variant='body1'
+              sx={{ fontStyle: 'italic', marginBottom: 1 }}>
               "It's so easy to find the items that I wanted!"
             </Typography>
-            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+            <Typography variant='body2' sx={{ fontWeight: 'bold' }}>
               - Angelina Jolie
             </Typography>
           </Box>
@@ -191,14 +237,6 @@ function ElegantSite() {
 }
 
 export default ElegantSite;
-
-
-
-
-
-
-
-
 
 // function ImageAvatars() {
 //   return (
@@ -231,13 +269,11 @@ export default ElegantSite;
 //         </Container>
 //       </React.Fragment>
 //     </Stack>
-    
+
 //   );
 
-  
 // }
-// export default ImageAvatars; 
- 
+// export default ImageAvatars;
 
 /* function Hub() {
   return (
