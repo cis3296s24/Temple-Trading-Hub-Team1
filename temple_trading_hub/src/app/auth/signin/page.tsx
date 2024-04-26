@@ -1,6 +1,6 @@
 'use client';
 
-import '../../Styles/global.css';
+import '@styles/global.css';
 import { UserAuth } from '@context/AuthContext';
 import {
   Box,
@@ -16,7 +16,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import '../../styles/signin.css';
+import '@styles/signIn.css';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
