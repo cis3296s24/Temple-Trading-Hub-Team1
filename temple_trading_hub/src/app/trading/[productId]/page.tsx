@@ -39,7 +39,7 @@ const ProductPage = ({ params }: any) => {
   }
 
   return (
-    <Container maxWidth='lg' sx={{ padding: '30px' }}>
+    <Container maxWidth='sm' sx={{ padding: '30px' }}>
       {/* <Card
         variant='outlined'
         sx={(theme) => ({
@@ -94,21 +94,21 @@ const ProductPage = ({ params }: any) => {
           />
         )}
         <CardContent>
-          <Typography variant='h1' align='center' color='text.secondary'>
+          <Typography variant='h3' align='center' color='text.secondary'>
             {product && //@ts-ignore
             product.title}
           </Typography>
-          <Typography variant='h4' color='text.secondary'>
+          <Typography variant='h5' color='text.secondary'>
             Description: {product && 
             //@ts-ignore 
             product.description}
           </Typography>
-          <Typography variant='h4' color='text.secondary'>
+          <Typography variant='h5' color='text.secondary'>
             
             Price: {product && //@ts-ignore 
             product.price}
           </Typography>
-          <Typography variant='h4' color='text.secondary'>
+          <Typography variant='h5' color='text.secondary'>
             
             Location: {product && //@ts-ignore 
             product.location}
