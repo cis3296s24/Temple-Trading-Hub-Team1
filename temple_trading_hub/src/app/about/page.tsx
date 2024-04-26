@@ -13,7 +13,8 @@ const About = () => {
         occur in designated safe areas located on-campus. We want to make it
         easier for everyone to buy and sell goods safely.</p>
       <p></p>
-      <p>Join our Owl Trading Community Today!</p>
+
+      <h4>Join our Owl Trading Community Today!</h4>
       <div className='image-container'>
         <img src='/images/Owl.png' alt='Owl' className='owl-image' />{' '}
         {/* Using relative path to the image */}
