@@ -1,5 +1,5 @@
 'use client';
-import styles from '../Styles/TopBar.module.css';
+import styles from '@styles/TopBar.module.css';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
@@ -13,7 +13,7 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import { UserAuth } from '@context/AuthContext';
 import { useEffect, useState } from 'react';
-import logo from '@Images/temple-logo.svg';
+import logo from '@images/temple-logo.svg';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Avatar, IconButton, Menu, Tooltip } from '@mui/material';

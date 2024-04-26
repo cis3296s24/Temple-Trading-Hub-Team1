@@ -1,6 +1,6 @@
 'use client';
-import '../../Styles/global.css';
-import styles from '../../styles/profile.module.css';
+import '@styles/global.css';
+import styles from '@styles/profile.module.css';
 import React from "react";
 import { Avatar, IconButton, Tooltip, Box, Radio, RadioGroup, FormControlLabel, Typography, Container, ImageListItem, } from '@mui/material';
 import { UserAuth } from '@context/AuthContext';
@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { collection, getDocs, where, getFirestore, query } from 'firebase/firestore';
 import { db } from '@firebase';
-import ItemsList from '../../components/ItmesList';
+import ItemsList from '@components/ItmesList';
 import ImageList from '@mui/material/ImageList';
 import useScreenSize from '@hooks/useScreenSize';
 import ThreadsCard from '@components/ThreadsCard';
